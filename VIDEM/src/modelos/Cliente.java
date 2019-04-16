@@ -1,7 +1,7 @@
 package modelos;
 /**
  * 
- * @author carolina
+ * @author carol
  *
  */
 
