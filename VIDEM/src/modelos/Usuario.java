@@ -2,7 +2,7 @@ package modelos;
 
 /**
  * 
- * @author carolina
+ * @author Carolina
  *
  */
 
