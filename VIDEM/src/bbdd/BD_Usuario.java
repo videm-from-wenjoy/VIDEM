@@ -1,7 +1,7 @@
 package bbdd;
 
 /**
- * @author carol
+ * @author carolina
  */
 
 import java.sql.*;

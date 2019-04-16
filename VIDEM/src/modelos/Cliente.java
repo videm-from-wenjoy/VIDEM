@@ -1,4 +1,9 @@
 package modelos;
+/**
+ * 
+ * @author carol
+ *
+ */
 
 public class Cliente extends Usuario{
 	private int numCliente;
