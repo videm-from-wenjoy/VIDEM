@@ -5,6 +5,9 @@ package bbdd;
  */
 
 import java.sql.*;
+
+import modelos.Cliente;
+import modelos.Empleado;
 import modelos.Usuario;
 public class BD_Usuario extends BD_Conector {
 	private static Statement s;		
@@ -31,8 +34,37 @@ public class BD_Usuario extends BD_Conector {
 		}
 		
 	}
-	public boolean borrar_Usuario(String numUsuario) {
-		String cadenaSQL="DELETE FROM usuarios WHERE numUsuario='"+numUsuario+"'";
+	public boolean borrar_Usuario(Usuario user,int num) {
+		String cadenaSQL="DELETE FROM usuarios WHERE EMAIL='"+user.getEmail()+"'";
+		String cadena2="";
+		if(user instanceof Empleado) {
+			cadena2="DELETE FROM empleados WHERE N_EMPLEADO ='"+num+"'";
+			try {
+				this.abrir();
+				s = c.createStatement();
+				s.executeQuery(cadena2);
+				s.close();
+				this.cerrar();
+				return true;
+			}catch(SQLException e) {
+				this.cerrar();
+				return false;
+			}
+		}
+		if(user instanceof Cliente) {
+			cadena2="DELETE FROM clientes WHERE N_SOCIO ='"+num+"'";
+			try {
+				this.abrir();
+				s = c.createStatement();
+				s.executeQuery(cadena2);
+				s.close();
+				this.cerrar();
+				return true;
+			}catch(SQLException e) {
+				this.cerrar();
+				return false;
+			}
+		}
 		try {
 			this.abrir();
 			s = c.createStatement();
@@ -43,6 +75,46 @@ public class BD_Usuario extends BD_Conector {
 		}catch(SQLException e) {
 			this.cerrar();
 			return false;
+		}
+	}
+	
+	public String login(Usuario user){
+		String cadena="SELECT ROL FROM usuarios WHERE EMAIL='" + user.getEmail() +"' AND PASSWORD='" + user.getPassword() +"'";
+		try{
+			String t="";
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getString(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e){
+	
+			return null;
+			
+		}
+	}
+	
+	public String loginEncargado(Usuario user){
+		String cadena="SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR')";
+		try{
+			String t="";
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getString(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e){
+	
+			return null;
+			
 		}
 	}
 }

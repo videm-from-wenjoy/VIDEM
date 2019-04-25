@@ -21,6 +21,11 @@ public class Usuario {
 		this.rol = rol;
 		this.telefono = telefono;
 	}
+	
+	public Usuario(String emaill, String clavee){
+		email=emaill;
+		password=clavee;
+	}
 
 	public String getEmail() {
 		return email;

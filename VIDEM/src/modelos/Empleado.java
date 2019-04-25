@@ -6,20 +6,20 @@ package modelos;
  */
 
 public class Empleado extends Usuario{
-	private int numCliente;
+	private int numEmpleado;
 
 	public Empleado(String email, String password, String nombre, String domicilio, String dni, String rol,
 			int telefono, int numCliente) {
 		super(email, password, nombre, domicilio, dni, rol, telefono);
-		this.numCliente = numCliente;
+		this.numEmpleado = numCliente;
 	}
 
-	public int getNumCliente() {
-		return numCliente;
+	public int getNumEmpleado() {
+		return numEmpleado;
 	}
 
-	public void setNumCliente(int numCliente) {
-		this.numCliente = numCliente;
+	public void setNumEmpleado(int numEmpleado) {
+		this.numEmpleado = numEmpleado;
 	}
 	
 	

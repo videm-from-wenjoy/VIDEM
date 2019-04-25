@@ -31,6 +31,24 @@ public class BD_Videojuego extends BD_Conector {
 		}	
 	}
 	
+	public int borrarVideojuego(Videojuego vi){
+		String cadena="DELETE FROM videojuegos WHERE COD_PRODUCTO='" +  vi.getCodProducto() + "'";	
+		
+		try{
+		this.abrir();
+		s=c.createStatement();
+		int filas=s.executeUpdate(cadena);	
+		s.close();
+		this.cerrar();
+		return filas;
+		
+		}
+		catch ( SQLException e){
+			this.cerrar();
+			return -1;
+		}
+	}
+	
 	public Vector<Videojuego>  listarVideojuegos(){
 		Vector <Videojuego> v=new Vector<Videojuego>();
 		String cadena="SELECT * FROM videojuegos ";
@@ -40,7 +58,7 @@ public class BD_Videojuego extends BD_Conector {
 			s=c.createStatement();
 			reg=s.executeQuery(cadena);
 			while ( reg.next()){						
-				 v.add(new Videojuego(reg.getString("COD_PRODUCTO"),reg.getString("TITULO"),reg.getDate("LANZAMIENTO"),reg.getString("PLATAFORMA"),reg.getString("GENERO"),reg.getString("PEGI"),reg.getInt("UNIDADES"),reg.getDouble("PRECIO"));
+				 v.add(new Videojuego(reg.getString("COD_PRODUCTO"),reg.getString("TITULO"),(reg.getDate("LANZAMIENTO")).toLocalDate(),reg.getString("PLATAFORMA"),reg.getString("GENERO"),reg.getString("PEGI"),reg.getInt("UNIDADES"),reg.getDouble("PRECIO")));
 			}
 			
 			s.close();
