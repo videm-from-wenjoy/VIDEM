@@ -22,7 +22,7 @@ public class BD_Usuario extends BD_Conector {
 	 * 
 	 * @param 
 	 * @return Devuelve verdadero(true) si se ha podido añadir un nuevo usuario y falso(false)
-	 * si no se puede añadir un usuario
+	 * si no se puede añadir un usuario.
 	 */
 	public boolean añadir_Usuario(Usuario user) {
 		String cadenaSQL="INSERT INTO usuarios VALUES('"+user.getEmail()+"','"+user.getPassword()+"','"
