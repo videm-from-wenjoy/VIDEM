@@ -1,15 +1,20 @@
 package bbdd;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import modelos.Compra;
 import modelos.Linea;
+import modelos.Videojuego;
 
 public class BD_Compra extends BD_Conector {
-  private Statement s;
-  private ResultSet reg;
+	private Statement s;
+	private ResultSet reg;
+	
+	public BD_Compra(String bbdd){
+		super (bbdd);
+	}
   
   public int añadirCompra(Compra co) {
 	String ordenSQL= "INSERT INTO compras VALUES('" +
@@ -45,5 +50,25 @@ public class BD_Compra extends BD_Conector {
 			System.err.println(se.getMessage());
 		}
 		  return -1;
-	  }
+  }
+  
+  public Vector<Linea>  listarComprasPorUsuario(){
+		Vector <Linea> v=new Vector<Linea>();
+		String cadena="SELECT * FROM videojuegos WHERE COD_PRODUCTO IN (SELECT COD_PRODUCTO FROM lineas)";
+		try{	
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			while ( reg.next()){						
+				 v.add(new Linea(reg.getInt("N_FACTURA"),reg.getString("COD_PRODUCTO"),reg.getInt("UNIDADES"),reg.getDouble("PRECIO")));
+			}	
+			s.close();
+			this.cerrar();
+			return v;
+		}
+		catch ( SQLException e){
+			return null;		
+		}				
+	}
+  
 }

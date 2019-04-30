@@ -1,18 +1,19 @@
 package modelos;
 
 public class Linea {
-private int numFactura;
-  private String codProducto;
-  private int unidades;
-  private double precio;
+	private int numFactura;
+	private String codProducto;
+	private int unidades;
+	private double precio;
   
-public Linea(int numFactura, String codProducto) {
-	super();
-	this.numFactura = numFactura;
-	this.codProducto = codProducto;
+	public Linea(int numFactura, String codProducto,int unidades) {
+		super();
+		this.numFactura = numFactura;
+		this.codProducto = codProducto;
+		this.unidades = unidades;
 	}
   
-public int getNumFactura() {
+	public int getNumFactura() {
 		return numFactura;
 	}
 
