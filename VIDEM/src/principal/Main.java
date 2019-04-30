@@ -47,10 +47,14 @@ public class Main {
 				System.out.println("Telefono:");
 				int telefono=sc.nextInt();
 				user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
-				if ( bbdd.añadir_Usuario(user))
+				if ( bbdd.añadir_Usuario(user)) {
 					System.out.println("Se ha dado de alta en VIDEM");
-				else
+					user = new Usuario(email,clave);				
+					opc=bbdd.login(user);
+				}
+				else {
 					System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
+				}	
 			}
 			else {
 				System.out.println("Vuelva pronto");
@@ -61,7 +65,7 @@ public class Main {
 			if(opc2=="ADMINISTRADOR") {
 				do {
 					System.out.println("1º Ver solicitudes");
-					System.out.println("2º ");
+					System.out.println("2º Dar de alta empleado");
 					opc3=sc.nextInt();
 				}while(opc3!= 4);
 			}
@@ -78,7 +82,12 @@ public class Main {
 			}
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
-			
+			do {
+				System.out.println("1º Buscar videojuego");
+				System.out.println("2º Comprar videojuego");
+				System.out.println("3º ");
+				opc3=sc.nextInt();
+			}while(opc3!= 4);
 		}
 	}
 
