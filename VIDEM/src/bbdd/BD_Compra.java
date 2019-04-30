@@ -3,7 +3,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
-
 import modelos.Compra;
 import modelos.Linea;
 import modelos.Videojuego;
@@ -18,8 +17,7 @@ public class BD_Compra extends BD_Conector {
   
   public int añadirCompra(Compra co) {
 	String ordenSQL= "INSERT INTO compras VALUES('" +
-    co.getNumFactura() + "','" + co.getNumCliente() + "','" + 
-	co.getPrecioT() + "','" + co.getFHCompra() + "')";
+    co.getNumFactura() + "','" + co.getNumCliente() + "',' SELECT SUM(PRECIO) FROM LINEAS WHERE N_FACTURA ='"+co.getNumFactura()+",'" + co.getFHCompra() + "')";
 	
 	try {
 		this.abrir();
@@ -35,9 +33,8 @@ public class BD_Compra extends BD_Conector {
   }
   
   public int añadirLinea(Linea li, Compra co) {
-		String ordenSQL= "INSERT INTO lineas VALUES('" +
-	    li.getNumFactura() + "','" + li.getCodProducto() + "','" + 
-		li.getUnidades() + "','" + li.getPrecio() + "') WHERE  numFactura= '" +  co.getNumFactura() + "'";
+		String ordenSQL= "INSERT INTO lineas VALUES('" +li.getNumFactura() + "','" + li.getCodProducto() + "','" + li.getUnidades() + "','" 
+		+ "'(SELECT PRECIO*'"+li.getUnidades()+"' FROM VIDEOJUEGOS WHERE COD_PRODUCTO ='" +li.getCodProducto()+ "') WHERE  numFactura= '" +  co.getNumFactura() + "'";
 		
 		try {
 			this.abrir();

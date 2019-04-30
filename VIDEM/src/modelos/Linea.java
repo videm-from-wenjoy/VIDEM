@@ -13,6 +13,14 @@ public class Linea {
 		this.unidades = unidades;
 	}
   
+	public Linea(int numFactura, String codProducto, int unidades, double precio) {
+		super();
+		this.numFactura = numFactura;
+		this.codProducto = codProducto;
+		this.unidades = unidades;
+		this.precio = precio;
+	}
+
 	public int getNumFactura() {
 		return numFactura;
 	}
