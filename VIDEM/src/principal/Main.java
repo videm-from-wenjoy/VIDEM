@@ -105,7 +105,7 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
-						System.out.println();
+						System.out.println("");
 						break;
 					case 2:
 						break;
