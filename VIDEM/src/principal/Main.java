@@ -1,4 +1,7 @@
 package principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import bbdd.BD_Usuario;
 import bbdd.BD_Videojuego;
@@ -19,6 +22,7 @@ public class Main {
 		BD_Usuario bbdd=new BD_Usuario("videm");
 		BD_Videojuego bbd=new BD_Videojuego("videm");
 		int opc3;
+		LocalDate lanzamiento=null;
 		
 		System.out.println("Introduce tu email");
 		String email=sc.nextLine();
@@ -85,8 +89,51 @@ public class Main {
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
+						System.out.println("Nuevo código de producto: ");
+						String codProducto=sc.nextLine();
+						System.out.println("Nuevo título del videojuego: ");
+						String titulo=sc.nextLine();
+						System.out.println("Nueva fecha de lanzamiento en formato:dd/mm/aa");
+						String fechaPasada=sc.nextLine();
+						DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+						try{
+							lanzamiento=LocalDate.parse(fechaPasada,fechaFormateada);
+						}catch(DateTimeParseException e){
+							System.out.println("Fecha incorrecta");
+						}
+						System.out.println("Plataforma del juego nuevo: ");
+						String plataforma=sc.nextLine();
+						System.out.println("Genero del juego nuevo");
+						String genero=sc.nextLine();
+						System.out.println("Clasificación PEGI: ");
+						String pegi=sc.nextLine();
+						System.out.println("Unidades disponibles: ");
+						int unidades=sc.nextInt();
+						System.out.println("Precio por unidad: ");
+						double precio=sc.nextDouble();
+						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
+						if ( bbd.añadirJuego(vi)) {
+							System.out.println("Se ha dado de alta en VIDEM");				
+						}
+						else {
+							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
+						}	
 						break;
 					case 2:
+						System.out.println("Código de producto: ");
+						codProducto=sc.nextLine();
+						vi = new Videojuego(codProducto);
+						int filas=bbd.borrarVideojuego(vi);
+						switch (filas){
+							case 0:
+								System.out.println("No es un videojuego");
+								break;
+							case 1: 
+								System.out.println("Videojuego eliminado");
+								break;
+							default:
+								System.out.println("En este momento no podemos eliminar. Inténtalo más tarde");
+						}
 						break;
 					case 3:
 						break;
@@ -100,14 +147,15 @@ public class Main {
 		if(opc.equalsIgnoreCase("CLIENTE")) {
 			do {
 				System.out.println("1º Buscar videojuego");
-				System.out.println("2º Comprar videojuego");
-				System.out.println("3º ");
+				System.out.println("2º Hacer compra");
+				System.out.println("3º Historial de compras");
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
 						System.out.println("");
 						break;
 					case 2:
+						System.out.println("1º Añadir a compra");
 						break;
 					case 3:
 						break;
