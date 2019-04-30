@@ -20,7 +20,7 @@ public class BD_Usuario extends BD_Conector {
 	}
 	/**
 	 * 
-	 * @param 
+	 * @param Se pasan los datos de un usuario. 
 	 * @return Devuelve verdadero(true) si se ha podido añadir un nuevo usuario y falso(false)
 	 * si no se puede añadir un usuario.
 	 */
@@ -44,8 +44,9 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * 
 	 * @param user
-	 * @param num
-	 * @return 
+	 * @param Pasamos el número del usuario que se desea eliminar, puede ser un empleado 
+	 * o cliente. 
+	 * @return Devuelve verdadero si se ha podido eliminar y falso si no. 
 	 */
 	public boolean borrar_Usuario(Usuario user,int num) {
 		String cadenaSQL="DELETE FROM usuarios WHERE EMAIL='"+user.getEmail()+"'";
@@ -91,9 +92,10 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	/**
-	 * 
-	 * @param user
-	 * @return
+	 * Método que sirve para obtener el rol(cliente,empleado) de un usuario que se utilizará para
+	 * iniciar sesión y que dejará ver diferentes menús. 
+	 * @param 
+	 * @return Devuelve un valor vacío o null si hay error, y si no hay error devuelve el Rol. 
 	 */
 	
 	public String login(Usuario user){
@@ -116,9 +118,10 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	/**
-	 * 
+	 * Método que sirve para obtener el puesto de empleados, que solo sean en encargado o
+	 * administrador, donde después podremos ver diferentes menús para cada uno. 
 	 * @param user
-	 * @return
+	 * @return Devuelve un valor vacio o nulo si hay un error, si no hay ninguno de esos devuelve el puesto. 
 	 */
 	public String loginEncargado(Usuario user){
 		String cadena="SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR')";
@@ -142,8 +145,8 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * 
 	 * @param user
-	 * @param campo
-	 * @param contenido
+	 * @param Se pasa el parametro campo que esa la opción del campo que queremos editar
+	 * @param contenido es lo que queremos editar
 	 * @return
 	 */
 	public int editarUsuario(Usuario user, int campo, String contenido) {
