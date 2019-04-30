@@ -24,7 +24,11 @@ public class Videojuego {
 			this.unidades = unidades;
 			this.precio = precio;
 		}
-
+		
+		public Videojuego(String codProducto) {
+			super();
+			this.codProducto = codProducto;
+		}
 
 		public String getCodProducto() {
 			return codProducto;

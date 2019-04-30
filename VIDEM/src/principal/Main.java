@@ -120,6 +120,20 @@ public class Main {
 						}	
 						break;
 					case 2:
+						System.out.println("Código de producto: ");
+						codProducto=sc.nextLine();
+						vi = new Videojuego(codProducto);
+						int filas=bbd.borrarVideojuego(vi);
+						switch (filas){
+							case 0:
+								System.out.println("No es un videojuego");
+								break;
+							case 1: 
+								System.out.println("Videojuego eliminado");
+								break;
+							default:
+								System.out.println("En este momento no podemos eliminar. Inténtalo más tarde");
+						}
 						break;
 					case 3:
 						break;
@@ -138,7 +152,7 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
-						System.out.println("INci");
+						System.out.println("");
 						break;
 					case 2:
 						System.out.println("1º Añadir a compra");
