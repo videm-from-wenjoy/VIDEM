@@ -67,6 +67,14 @@ public class Main {
 					System.out.println("1º Ver solicitudes");
 					System.out.println("2º Dar de alta empleado");
 					opc3=sc.nextInt();
+					switch(opc3) {
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+				}
 				}while(opc3!= 4);
 			}
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
@@ -75,6 +83,14 @@ public class Main {
 					System.out.println("2º Borrar videojuego");
 					System.out.println("3º Recuento de ventas");
 					opc3=sc.nextInt();
+					switch(opc3) {
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+				}
 				}while(opc3!= 4);
 			}
 			else {
@@ -87,6 +103,14 @@ public class Main {
 				System.out.println("2º Comprar videojuego");
 				System.out.println("3º ");
 				opc3=sc.nextInt();
+				switch(opc3) {
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+				}
 			}while(opc3!= 4);
 		}
 	}
