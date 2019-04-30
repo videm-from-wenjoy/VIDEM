@@ -138,7 +138,7 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
-						System.out.println("");
+						System.out.println("INci");
 						break;
 					case 2:
 						System.out.println("1º Añadir a compra");
