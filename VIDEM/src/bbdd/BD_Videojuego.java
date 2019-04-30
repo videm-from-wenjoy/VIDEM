@@ -69,9 +69,29 @@ public class BD_Videojuego extends BD_Conector {
 	
 			return null;
 			
+		}				
+	
+	
+	}
+	
+	public Vector<Videojuego> buscarVideojuego(int campo, String contenido, String plataforma) {
+		Vector<Videojuego> v=new Vector<Videojuego>();
+		String cadenaSQL="";		
+		if(campo==1)
+			cadenaSQL="SELECT * FROM videojuegos WHERE COD_PRODUCTO='"+contenido+"' AND PLATAFORMA='"+plataforma+"'";
+		if(campo==2)
+			cadenaSQL="SELECT * FROM videojuegos WHERE TITULO='"+contenido+"' AND PLATAFORMA='"+plataforma+"'";
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while(reg.next()) {
+				v.add(new Videojuego(reg.getString("COD_PRODUCTO"),reg.getString("TITULO"),(reg.getDate("LANZAMIENTO")).toLocalDate(),reg.getString("PLATAFORMA"),reg.getString("GENERO"),reg.getString("PEGI"),reg.getInt("UNIDADES"),reg.getDouble("PRECIO")));		
+			}
+			return v;
+		}catch(SQLException e) {
+			this.cerrar();
+			return null;
 		}
-				
-	
-	
 	}
 }

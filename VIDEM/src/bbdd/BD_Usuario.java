@@ -9,6 +9,8 @@ import java.sql.*;
 import modelos.Cliente;
 import modelos.Empleado;
 import modelos.Usuario;
+import java.util.*;
+
 public class BD_Usuario extends BD_Conector {
 	private static Statement s;		
 	private static ResultSet reg;
@@ -16,7 +18,12 @@ public class BD_Usuario extends BD_Conector {
 	public BD_Usuario(String bbdd){
 		super (bbdd);
 	}
-	
+	/**
+	 * 
+	 * @param Se pasan los datos de un usuario. 
+	 * @return Devuelve verdadero(true) si se ha podido añadir un nuevo usuario y falso(false)
+	 * si no se puede añadir un usuario.
+	 */
 	public boolean añadir_Usuario(Usuario user) {
 		String cadenaSQL="INSERT INTO usuarios VALUES('"+user.getEmail()+"','"+user.getPassword()+"','"
 						+user.getNombre()+"','"+user.getDomicilio()+"','"+user.getDni()+"','"+user.getRol()+"','"
@@ -34,6 +41,13 @@ public class BD_Usuario extends BD_Conector {
 		}
 		
 	}
+	/**
+	 * 
+	 * @param user
+	 * @param Pasamos el número del usuario que se desea eliminar, puede ser un empleado 
+	 * o cliente. 
+	 * @return Devuelve verdadero si se ha podido eliminar y falso si no. 
+	 */
 	public boolean borrar_Usuario(Usuario user,int num) {
 		String cadenaSQL="DELETE FROM usuarios WHERE EMAIL='"+user.getEmail()+"'";
 		String cadena2="";
@@ -77,6 +91,12 @@ public class BD_Usuario extends BD_Conector {
 			return false;
 		}
 	}
+	/**
+	 * Método que sirve para obtener el rol(cliente,empleado) de un usuario que se utilizará para
+	 * iniciar sesión y que dejará ver diferentes menús. 
+	 * @param 
+	 * @return Devuelve un valor vacío o null si hay error, y si no hay error devuelve el Rol. 
+	 */
 	
 	public String login(Usuario user){
 		String cadena="SELECT ROL FROM usuarios WHERE EMAIL='" + user.getEmail() +"' AND PASSWORD='" + user.getPassword() +"'";
@@ -97,7 +117,12 @@ public class BD_Usuario extends BD_Conector {
 			
 		}
 	}
-	
+	/**
+	 * Método que sirve para obtener el puesto de empleados, que solo sean en encargado o
+	 * administrador, donde después podremos ver diferentes menús para cada uno. 
+	 * @param user
+	 * @return Devuelve un valor vacio o nulo si hay un error, si no hay ninguno de esos devuelve el puesto. 
+	 */
 	public String loginEncargado(Usuario user){
 		String cadena="SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR')";
 		try{
@@ -117,4 +142,61 @@ public class BD_Usuario extends BD_Conector {
 			
 		}
 	}
+	/**
+	 * 
+	 * @param user
+	 * @param Se pasa el parametro campo que esa la opción del campo que queremos editar
+	 * @param contenido es lo que queremos editar
+	 * @return
+	 */
+	public int editarUsuario(Usuario user, int campo, String contenido) {
+		String cadenaSQL="";
+		if (campo==1) 
+			cadenaSQL="UPDATE usuarios SET EMAIL='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		if (campo==2)
+			cadenaSQL="UPDATE usuarios SET PASSWORD='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		if(campo==3)
+			cadenaSQL="UPDATE usuarios SET ROL='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		if(campo==4)
+			cadenaSQL="UPDATE usuarios SET NOMBRE='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		if(campo==5)
+			cadenaSQL="UPDATE usuarios SET DIRECCION='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		if(campo==6)
+			cadenaSQL="UPDATE usuarios SET TELEFONO='"+contenido+"' WHERE DNI='"+user.getDni()+"'";
+		try {
+			this.abrir();
+			s = c.createStatement();
+			int filas = s.executeUpdate(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return filas;
+		}catch(SQLException e) {
+			this.cerrar();
+			return -1;
+		}
+	}
+	/**
+	 * Muestra una lista completa de todos los usuarios.
+	 * @return
+	 */
+	public Vector<Usuario> listarUsuarios(){
+		String cadenaSQL="SELECT * FROM usuarios";
+		Vector<Usuario> users = new Vector<Usuario>();
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while(reg.next()) {
+				users.add(new Usuario(reg.getString("EMAIL"),reg.getString("PASSWORD"),reg.getString("ROL"),reg.getString("NOMBRE"),reg.getString("DNI"),reg.getString("DIRECCION"),reg.getInt("TELEFONO")));
+			}
+			s.close();
+			this.cerrar();
+			return users;
+		}catch(SQLException e) {
+			this.cerrar();
+			return null;
+		}
+	}
+	
+	
 }
