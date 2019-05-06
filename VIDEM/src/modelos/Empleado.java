@@ -13,6 +13,20 @@ public class Empleado extends Usuario{
 		super(email, password, nombre, domicilio, dni, rol, telefono);
 		this.numEmpleado = numEmpleado;
 	}
+	
+	public Empleado(String email) {
+		super(email);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Empleado(String emaill, String clavee) {
+		super(emaill, clavee);
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	public int getNumEmpleado() {
 		return numEmpleado;
