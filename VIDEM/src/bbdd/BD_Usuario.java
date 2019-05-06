@@ -198,5 +198,41 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	
+	public String validarDNI(Usuario user) {
+		String cadenaSQL="SELECT DNI FROM usuarios WHERE DNI='"+user.getDni()+"'";
+		try {
+			String t="";
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if(reg.next())
+				t = reg.getString("DNI");
+			s.close();
+			this.cerrar();
+			return t;
+		}catch(SQLException e) {
+			this.cerrar();
+			return null;
+		}
+	}
+	
+	public int validarTELEFONO(Usuario user) {
+		String cadenaSQL="SELECT TELEFONO FROM usuarios WHERE TELEFONO='"+user.getTelefono()+"'";
+		try {
+			int t=0;
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if(reg.next())
+				t = reg.getInt("TELEFONO");
+			s.close();
+			this.cerrar();
+			return t;
+		}catch(SQLException e) {
+			this.cerrar();
+			return -1;
+		}
+	}
+	
 	
 }
