@@ -25,7 +25,7 @@ public class BD_Usuario extends BD_Conector {
 	 * @return Devuelve verdadero(true) si se ha podido añadir un nuevo usuario y
 	 *         falso(false) si no se puede añadir un usuario.
 	 */
-	public boolean añadir_Usuario(Usuario user) {
+	public boolean a�adir_Usuario(Usuario user) {
 		String cadenaSQL = "INSERT INTO usuarios VALUES('" + user.getEmail() + "','" + user.getPassword() + "','"
 				+ user.getNombre() + "','" + user.getDomicilio() + "','" + user.getDni() + "','" + user.getRol() + "','"
 				+ user.getTelefono() + "')";
@@ -50,11 +50,11 @@ public class BD_Usuario extends BD_Conector {
 	 *                empleado o cliente.
 	 * @return Devuelve verdadero si se ha podido eliminar y falso si no.
 	 */
-	public boolean borrar_Usuario(Usuario user, int num) {
+	public boolean borrar_Usuario(Usuario user) {
 		String cadenaSQL = "DELETE FROM usuarios WHERE EMAIL='" + user.getEmail() + "'";
 		String cadena2 = "";
 		if (user instanceof Empleado) {
-			cadena2 = "DELETE FROM empleados WHERE N_EMPLEADO ='" + num + "'";
+			cadena2 = "DELETE FROM empleados WHERE EMAIL ='" + user.getEmail() + "'";
 			try {
 				this.abrir();
 				s = c.createStatement();
@@ -68,7 +68,7 @@ public class BD_Usuario extends BD_Conector {
 			}
 		}
 		if (user instanceof Cliente) {
-			cadena2 = "DELETE FROM clientes WHERE N_SOCIO ='" + num + "'";
+			cadena2 = "DELETE FROM clientes WHERE EMAIL ='" + user.getEmail() + "'";
 			try {
 				this.abrir();
 				s = c.createStatement();

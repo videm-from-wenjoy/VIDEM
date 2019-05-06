@@ -18,47 +18,55 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
-		Usuario user;
+		Usuario user=null;
 		Videojuego vi;
 		BD_Usuario bbdd=new BD_Usuario("videm");
 		BD_Videojuego bbd=new BD_Videojuego("videm");
-		String opc;
-		char opcIni;
+		String opc=null;
 		int opc3;
 		LocalDate lanzamiento=null;
+		String email,clave;
 		
-		System.out.println("¿Quieres registrarte en VIDEM? S/N");
-		opcIni=sc.nextLine().charAt(0);
-		if(opcIni=='S' || opcIni=='s') {
-			System.out.println("Correo electronico");
-			String email=sc.nextLine();
-			System.out.println("Clave personal:");
-			String clave=sc.nextLine();
-			System.out.println("Nombre:");
-			String nombre=sc.nextLine();
-			System.out.println("Dni:");
-			String dni=sc.nextLine();
-			System.out.println("Domicilio:");
-			String domicilio=sc.nextLine();
-			System.out.println("Telefono:");
-			int telefono=sc.nextInt();
-			user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
-			if ( bbdd.añadir_Usuario(user)) {
-				System.out.println("Se ha dado de alta en VIDEM");
-				user = new Usuario(email,clave);				
-				opc=bbdd.login(user);
+		do {
+			System.out.println("1º Iniciar Sesión");
+			System.out.println("2º Registrarse en VIDEM");
+			int opcIni=sc.nextInt();
+			switch(opcIni) {
+				case 1:
+					sc.nextLine();
+					System.out.println("Introduce tu email");
+					email=sc.nextLine();
+					System.out.println("Introduce tu contraseña");
+					clave=sc.nextLine();
+					user = new Usuario(email,clave);				
+					opc=bbdd.login(user);
+					break;
+				case 2:
+					sc.nextLine();
+					System.out.println("Correo electronico");
+					email=sc.nextLine();
+					System.out.println("Clave personal:");
+					clave=sc.nextLine();
+					System.out.println("Nombre:");
+					String nombre=sc.nextLine();
+					System.out.println("Dni:");
+					String dni=sc.nextLine();
+					System.out.println("Domicilio:");
+					String domicilio=sc.nextLine();
+					System.out.println("Telefono:");
+					int telefono=sc.nextInt();
+					user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
+					if ( bbdd.añadir_Usuario(user)) {
+						System.out.println("Se ha dado de alta en VIDEM");
+						user = new Usuario(email,clave);				
+						opc=bbdd.login(user);
+					}
+					else {
+						System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
+					}
+					break;
 			}
-			else {
-				System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
-			}
-		}
-		
-		System.out.println("Introduce tu email");
-		String email=sc.nextLine();
-		System.out.println("Introduce tu contraseña");
-		String clave=sc.nextLine();
-		user = new Usuario(email,clave);				
-		opc=bbdd.login(user);
+		}while(opc==null);
 		
 		if(opc.equalsIgnoreCase("EMPLEADO")) {
 			String opc2=bbdd.loginEncargado(user);
@@ -190,54 +198,4 @@ public class Main {
 
 	}
 	
-	public static String Inicio() {
-		Scanner sc=new Scanner(System.in);
-		Usuario user;
-		Videojuego vi;
-		BD_Usuario bbdd=new BD_Usuario("videm");
-		BD_Videojuego bbd=new BD_Videojuego("videm");
-		String opc;
-		System.out.println("1º Iniciar Sesión");
-		System.out.println("2º Registrarse en VIDEM");
-		int opcIni=sc.nextInt();
-		if(opcIni=='1') {
-			sc.nextLine();
-			System.out.println("Introduce tu email");
-			String email=sc.nextLine();
-			System.out.println("Introduce tu contraseña");
-			String clave=sc.nextLine();
-			user = new Usuario(email,clave);				
-			opc=bbdd.login(user);
-			return opc;
-		}
-		if(opcIni=='2') {
-			sc.nextLine();
-			System.out.println("Correo electronico");
-			String email=sc.nextLine();
-			System.out.println("Clave personal:");
-			String clave=sc.nextLine();
-			System.out.println("Nombre:");
-			String nombre=sc.nextLine();
-			System.out.println("Dni:");
-			String dni=sc.nextLine();
-			System.out.println("Domicilio:");
-			String domicilio=sc.nextLine();
-			System.out.println("Telefono:");
-			int telefono=sc.nextInt();
-			user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
-			if ( bbdd.añadir_Usuario(user)) {
-				System.out.println("Se ha dado de alta en VIDEM");
-				user = new Usuario(email,clave);				
-				opc=bbdd.login(user);
-				return opc;
-			}
-			else {
-				System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
-				return null;
-			}
-
-		}
-		return null;
-	}
-
 }
