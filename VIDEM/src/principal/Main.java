@@ -181,7 +181,7 @@ public class Main {
 						System.out.println("1º Añadir a compra");
 						break;
 					case 3:
-						
+						System.out.println();
 						break;
 				}
 			}while(opc3!= 4);

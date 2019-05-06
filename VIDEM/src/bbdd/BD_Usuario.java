@@ -198,7 +198,11 @@ public class BD_Usuario extends BD_Conector {
 			return null;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public int numEmpleado(Usuario user){
 		String cadena="SELECT MAX(N_EMPLEADO) FROM empleados";
 		try{
@@ -216,7 +220,11 @@ public class BD_Usuario extends BD_Conector {
 			return -1;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public int numCliente(Usuario user){
 		String cadena="SELECT MAX(N_SOCIO) FROM clientes";
 		try{
