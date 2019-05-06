@@ -27,6 +27,10 @@ public class Usuario {
 		email=emaill;
 		password=clavee;
 	}
+	
+	public Usuario(String emailll){
+		email=emailll;
+	}
 
 	public String getEmail() {
 		return email;

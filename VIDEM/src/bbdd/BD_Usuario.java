@@ -22,10 +22,10 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * 
 	 * @param Se pasan los datos de un usuario.
-	 * @return Devuelve verdadero(true) si se ha podido añadir un nuevo usuario y
-	 *         falso(false) si no se puede añadir un usuario.
+	 * @return Devuelve verdadero(true) si se ha podido aÃ±adir un nuevo usuario y
+	 *         falso(false) si no se puede aÃ±adir un usuario.
 	 */
-	public boolean añadir_Usuario(Usuario user) {
+	public boolean aÃ±adir_Usuario(Usuario user) {
 		String cadenaSQL = "INSERT INTO usuarios VALUES('" + user.getEmail() + "','" + user.getPassword() + "','"
 				+ user.getNombre() + "','" + user.getDomicilio() + "','" + user.getDni() + "','" + user.getRol() + "','"
 				+ user.getTelefono() + "')";
@@ -46,7 +46,7 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * 
 	 * @param user
-	 * @param Pasamos el número del usuario que se desea eliminar, puede ser un
+	 * @param Pasamos el nÃºmero del usuario que se desea eliminar, puede ser un
 	 *                empleado o cliente.
 	 * @return Devuelve verdadero si se ha podido eliminar y falso si no.
 	 */
@@ -95,11 +95,11 @@ public class BD_Usuario extends BD_Conector {
 	}
 
 	/**
-	 * Método que sirve para obtener el rol(cliente,empleado) de un usuario que se
-	 * utilizará para iniciar sesión y que dejará ver diferentes menús.
+	 * MÃ©todo que sirve para obtener el rol(cliente,empleado) de un usuario que se
+	 * utilizarÃ¡ para iniciar sesiÃ³n y que dejarÃ¡ ver diferentes menÃºs.
 	 * 
 	 * @param
-	 * @return Devuelve un valor vacío o null si hay error, y si no hay error
+	 * @return Devuelve un valor vacÃ­o o null si hay error, y si no hay error
 	 *         devuelve el Rol.
 	 */
 
@@ -124,8 +124,8 @@ public class BD_Usuario extends BD_Conector {
 	}
 
 	/**
-	 * Método que sirve para obtener el puesto de empleados, que solo sean en
-	 * encargado o administrador, donde después podremos ver diferentes menús para
+	 * MÃ©todo que sirve para obtener el puesto de empleados, que solo sean en
+	 * encargado o administrador, donde despuÃ©s podremos ver diferentes menÃºs para
 	 * cada uno.
 	 * 
 	 * @param user
@@ -154,7 +154,7 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * 
 	 * @param user
-	 * @param Se        pasa el parametro campo que esa la opción del campo que
+	 * @param Se        pasa el parametro campo que esa la opciÃ³n del campo que
 	 *                  queremos editar
 	 * @param contenido es lo que queremos editar
 	 * @return
@@ -209,6 +209,51 @@ public class BD_Usuario extends BD_Conector {
 		} catch (SQLException e) {
 			this.cerrar();
 			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public int numEmpleado(Usuario user){
+		String cadena="SELECT MAX(N_EMPLEADO) FROM empleados";
+		try{
+			int t=0;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getInt(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e) {
+			return -1;
+		}
+	}
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public int numCliente(Usuario user){
+		String cadena="SELECT MAX(N_SOCIO) FROM clientes";
+		try{
+			int t=0;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getInt(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e) {
+			return -1;
 		}
 	}
 
@@ -280,5 +325,4 @@ public class BD_Usuario extends BD_Conector {
 		}
 		return true;
 	}
-
 }
