@@ -41,6 +41,7 @@ public class BD_Usuario extends BD_Conector {
 		}
 		
 	}
+	
 	/**
 	 * 
 	 * @param user
@@ -198,5 +199,39 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	
+	public int numEmpleado(Usuario user){
+		String cadena="SELECT MAX(N_EMPLEADO) FROM empleados";
+		try{
+			int t=0;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getInt(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e) {
+			return -1;
+		}
+	}
 	
+	public int numCliente(Usuario user){
+		String cadena="SELECT MAX(N_SOCIO) FROM clientes";
+		try{
+			int t=0;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next())							
+				t= reg.getInt(1);							
+			s.close();
+			this.cerrar();
+			return t;
+		}
+		catch ( SQLException e) {
+			return -1;
+		}
+	}
 }
