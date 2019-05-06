@@ -68,4 +68,20 @@ public class BD_Compra extends BD_Conector {
 		}				
 	}
   
+  public int updateCompra(Compra co){
+	  String cadenaSQL="UPDATE compras SET PRECIO_TOTAL=SELECT SUM(PRECIO) FROM LINEAS WHERE N_FACTURA='"+co.getNumFactura()+"'";
+	  try {
+		  this.abrir();
+		  s = c.createStatement();
+		  int filas = s.executeUpdate(cadenaSQL);
+		  s.close();
+		  this.cerrar();
+		  return filas;		  
+	  }catch(SQLException e) {
+		  this.cerrar();
+		  return -1;
+	  }
+	  
+  }
+  
 }
