@@ -143,7 +143,7 @@ public class Main {
 						}	
 						break;
 					case 2:
-						System.out.println("Código de producto: ");
+						System.out.println("Código de producto:");
 						codProducto=sc.nextLine();
 						vi = new Videojuego(codProducto);
 						int filas=bbd.borrarVideojuego(vi);
