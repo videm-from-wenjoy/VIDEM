@@ -277,30 +277,38 @@ public class BD_Usuario extends BD_Conector {
 			this.cerrar();
 			return -1;
 		}
-	}
-	
+	}	
 
 	public boolean validarDNI(String dni) {
-		if (dni.length() > 9 || dni.length() < 2)
-			// user.getDni().length()>9
-			return false;
-		for (int i = 0; i < dni.length() - 2; i++) {
-			if (dni.charAt(i) < '0' || dni.charAt(i) > '9')
-				return false;
-		}
-		int ultpost = dni.length() - 1;
-		char car = Character.toUpperCase(dni.charAt(ultpost));
-		if (car < 'A' || car > 'Z')
-			return false;
-		return true;
-	}
-
-	public char validarLetraDNI(long num) {
-		final String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-		int resto = (int) (num % 23);
-		return letras.charAt(resto);
-
-	}
+		 
+        boolean correcto = false;
+        int i = 0;
+        int caracter = 0;
+        char letra = ' ';
+        int miDNI = 0;
+        int resto = 0;
+        char[] bLetra = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X','B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+ 
+ 
+        if(dni.length() == 9 && Character.isLetter(dni.charAt(8))) {
+ 
+            do {
+                caracter = dni.codePointAt(i);
+                correcto = (caracter > 47 && caracter < 58);
+                i++;
+            } 
+            while(i < dni.length() - 1 && correcto);     
+        }
+ 
+        if(correcto) {
+            letra = Character.toUpperCase(dni.charAt(8));
+            miDNI = Integer.parseInt(dni.substring(0,8));
+            resto = miDNI % 23;
+            correcto = (letra == bLetra[resto]);
+        }
+ 
+        return correcto;
+    }
 
 	public boolean validarTelefono(String tlf) {
 		if (tlf.length() < 9)
