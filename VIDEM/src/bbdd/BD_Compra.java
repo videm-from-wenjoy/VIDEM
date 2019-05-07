@@ -5,7 +5,6 @@ import java.sql.Statement;
 import java.util.Vector;
 import modelos.Compra;
 import modelos.Linea;
-import modelos.Videojuego;
 
 public class BD_Compra extends BD_Conector {
 	private Statement s;
@@ -66,7 +65,64 @@ public class BD_Compra extends BD_Conector {
 		catch ( SQLException e){
 			return null;		
 		}				
-	}
+  }
+  
+  public Vector<Compra>  compras(){
+		Vector <Compra> ca=new Vector<Compra>();
+		String cadenaC="SELECT * FROM COMPRAS";
+		try{	
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaC);
+			while ( reg.next()){						
+				 ca.add(new Compra(reg.getInt("N_FACTURA"),reg.getInt("N_SOCIO"),reg.getDouble("PRECIO_TOTAL"),(reg.getDate("FH_COMPRA")).toLocalDate()));
+			}	
+			s.close();
+			this.cerrar();
+			return ca;
+		}
+		catch ( SQLException e){
+			return null;		
+		}				
+  }
+  
+  public Vector<Compra>  comprasPropias(){
+		Vector <Compra> ca=new Vector<Compra>();
+		String cadenaC="SELECT * FROM COMPRAS";
+		try{	
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaC);
+			while ( reg.next()){						
+				 ca.add(new Compra(reg.getInt("N_FACTURA"),reg.getInt("N_SOCIO"),reg.getDouble("PRECIO_TOTAL"),(reg.getDate("FH_COMPRA")).toLocalDate()));
+			}	
+			s.close();
+			this.cerrar();
+			return ca;
+		}
+		catch ( SQLException e){
+			return null;		
+		}				
+  }
+  
+  public Vector<Linea>  lineas(Compra co){
+		Vector <Linea> la=new Vector<Linea>();
+		String cadenaL="SELECT * FROM LINEAS WHERE N_FACTURA = '"+co.getNumFactura()+"'";
+		try{	
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaL);
+			while ( reg.next()){						
+				la.add(new Linea(reg.getInt("N_FACTURA"),reg.getString("COD_PRODUCTO"),reg.getInt("UNIDADES"),reg.getDouble("PRECIO")));
+			}	
+			s.close();
+			this.cerrar();
+			return la;
+		}
+		catch ( SQLException e){
+			return null;		
+		}				
+  }
   
   public int updateCompra(Compra co){
 	  String cadenaSQL="UPDATE compras SET PRECIO_TOTAL=SELECT SUM(PRECIO) FROM lineas WHERE N_FACTURA='"+co.getNumFactura()+"'";

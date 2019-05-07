@@ -3,9 +3,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+
+import bbdd.BD_Compra;
 import bbdd.BD_Usuario;
 import bbdd.BD_Videojuego;
+import modelos.Compra;
 import modelos.Empleado;
+import modelos.Linea;
 import modelos.Usuario;
 import modelos.Videojuego;
 /**
@@ -20,8 +24,10 @@ public class Main {
 		Scanner sc=new Scanner(System.in);
 		Usuario user=null;
 		Videojuego vi;
+		Compra co=null;
 		BD_Usuario bbdd=new BD_Usuario("videm");
 		BD_Videojuego bbd=new BD_Videojuego("videm");
+		BD_Compra bd=new BD_Compra("videm");
 		String opc=null;
 		int opc3;
 		LocalDate lanzamiento=null;
@@ -163,6 +169,14 @@ public class Main {
 						}
 						break;
 					case 3:
+						Vector<Compra> ca=bd.compras();
+						for(int i=0;i<ca.size();i++) {
+							System.out.println(ca.get(i));
+							Vector<Linea> la=bd.lineas(co);
+							for(i=0;i<la.size();i++) {
+								System.out.println(la.get(i));
+							}
+						}
 						break;
 					case 4:
 						Vector<Videojuego> v=bbd.listarVideojuegos();
@@ -246,6 +260,14 @@ public class Main {
 						break;
 					case 3:
 						System.out.println();
+						Vector<Compra> ca=bd.compras();
+						for(int i=0;i<ca.size();i++) {
+							System.out.println(ca.get(i));
+							Vector<Linea> la=bd.lineas(co);
+							for(i=0;i<la.size();i++) {
+								System.out.println(la.get(i));
+							}
+						}
 						break;
 				}
 			}while(opc3!= 4);
