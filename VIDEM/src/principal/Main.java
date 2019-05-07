@@ -72,14 +72,12 @@ public class Main {
 			String opc2=bbdd.loginEncargado(user);
 			if(opc2=="ADMINISTRADOR") {
 				do {
-					System.out.println("1º Ver solicitudes");
-					System.out.println("2º Dar de alta empleado");
-					System.out.println("3º Dar de baja empleado");
+					System.out.println("1º Dar de alta empleado");
+					System.out.println("2º Dar de baja empleado");
+					System.out.println("3º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
-						break;
-					case 2:
 						System.out.println("Correo electronico");
 						email=sc.nextLine();
 						System.out.println("Clave personal:");
@@ -99,7 +97,7 @@ public class Main {
 						user = new Empleado(email,clave,nombre,domicilio,dni,puesto,telefono,numero);
 						bbdd.añadir_Usuario(user);
 						break;
-					case 3:
+					case 2:
 						System.out.println("Correo electronico");
 						email=sc.nextLine();
 						user = new Empleado(email);
@@ -113,6 +111,8 @@ public class Main {
 					System.out.println("1º Añadir videojuego");
 					System.out.println("2º Borrar videojuego");
 					System.out.println("3º Recuento de ventas");
+					System.out.println("4º Listar videojuegos");
+					System.out.println("5º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -164,11 +164,70 @@ public class Main {
 						break;
 					case 3:
 						break;
-				}
-				}while(opc3!= 4);
+					case 4:
+						Vector<Videojuego> v=bbd.listarVideojuegos();
+						for(int i=0;i<v.size();i++)
+							System.out.println(v.get(i));
+						break;
+					}
+				}while(opc3!= 5);
 			}
 			else {
-				
+				do {
+					System.out.println("1º Añadir videojuego");
+					System.out.println("2º Borrar videojuego");
+					System.out.println("3º Salir");
+					opc3=sc.nextInt();
+					switch(opc3) {
+					case 1:
+						System.out.println("Nuevo código de producto: ");
+						String codProducto=sc.nextLine();
+						System.out.println("Nuevo título del videojuego: ");
+						String titulo=sc.nextLine();
+						System.out.println("Nueva fecha de lanzamiento en formato:dd/mm/aa");
+						String fechaPasada=sc.nextLine();
+						DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+						try{
+							lanzamiento=LocalDate.parse(fechaPasada,fechaFormateada);
+						}catch(DateTimeParseException e){
+							System.out.println("Fecha incorrecta");
+						}
+						System.out.println("Plataforma del juego nuevo: ");
+						String plataforma=sc.nextLine();
+						System.out.println("Genero del juego nuevo");
+						String genero=sc.nextLine();
+						System.out.println("Clasificación PEGI: ");
+						String pegi=sc.nextLine();
+						System.out.println("Unidades disponibles: ");
+						int unidades=sc.nextInt();
+						System.out.println("Precio por unidad: ");
+						double precio=sc.nextDouble();
+						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
+						if ( bbd.añadirJuego(vi)) {
+							System.out.println("Se ha dado de alta en VIDEM");				
+						}
+						else {
+							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo más tarde.");
+						}	
+						break;
+					case 2:
+						System.out.println("Código de producto:");
+						codProducto=sc.nextLine();
+						vi = new Videojuego(codProducto);
+						int filas=bbd.borrarVideojuego(vi);
+						switch (filas){
+							case 0:
+								System.out.println("No es un videojuego");
+								break;
+							case 1: 
+								System.out.println("Videojuego eliminado");
+								break;
+							default:
+								System.out.println("En este momento no podemos eliminar. Inténtalo más tarde");
+						}
+						break;
+				}
+				}while(opc3!= 3);
 			}
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
