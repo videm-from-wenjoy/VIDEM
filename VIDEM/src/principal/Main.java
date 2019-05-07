@@ -235,6 +235,7 @@ public class Main {
 				System.out.println("1º Buscar videojuego");
 				System.out.println("2º Hacer compra");
 				System.out.println("3º Historial de compras");
+				System.out.println("4º Salir.");
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:

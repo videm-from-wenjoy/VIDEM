@@ -61,7 +61,7 @@ public class BD_Videojuego extends BD_Conector {
 	}
 	/**
 	 * Método que lista todos los registros de la tabla videojuegos de la base de datos y los muestra por pantalla.
-	 * @return
+	 * @return v o null, devuelva las filas o nada si la tabla esta vacía.
 	 */
 	public Vector<Videojuego>  listarVideojuegos(){
 		Vector <Videojuego> v=new Vector<Videojuego>();
