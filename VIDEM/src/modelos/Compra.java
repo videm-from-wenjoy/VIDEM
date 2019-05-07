@@ -1,7 +1,11 @@
 package modelos;
-
 import java.sql.Date;
 import java.time.LocalDate;
+/**
+ * 
+ * @author Gonzalo
+ *
+ */
 
 public class Compra {
  private int numFactura;

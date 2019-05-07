@@ -85,7 +85,10 @@ public class BD_Compra extends BD_Conector {
 			return null;		
 		}				
   }
-  
+  /**
+   * Método donde el usuario podrá listar sus comprar para verlas por pantalla.
+   * @return
+   */
   public Vector<Compra>  comprasPropias(){
 		Vector <Compra> ca=new Vector<Compra>();
 		String cadenaC="SELECT * FROM COMPRAS";

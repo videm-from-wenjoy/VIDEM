@@ -259,6 +259,7 @@ public class Main {
 						System.out.println("1º Añadir a compra");
 						break;
 					case 3:
+						System.out.println("Facturas: ");
 						System.out.println();
 						Vector<Compra> ca=bd.compras();
 						for(int i=0;i<ca.size();i++) {
