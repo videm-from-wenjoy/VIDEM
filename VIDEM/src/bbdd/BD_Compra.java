@@ -132,6 +132,7 @@ public class BD_Compra extends BD_Conector {
   
   public int updateCompra(Compra co){
 	  String cadenaSQL="UPDATE compras SET PRECIO_TOTAL=SELECT SUM(PRECIO) FROM lineas WHERE N_FACTURA='"+co.getNumFactura()+"'";
+	  
 	  try {
 		  this.abrir();
 		  s = c.createStatement();

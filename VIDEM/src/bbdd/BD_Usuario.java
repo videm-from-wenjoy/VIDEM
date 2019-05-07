@@ -1,7 +1,7 @@
 package bbdd;
 
 /**
- * @author Carolina
+ * @author Carolina Buenaño
  */
 
 import java.sql.*;
@@ -21,9 +21,8 @@ public class BD_Usuario extends BD_Conector {
 
 	/**
 	 * 
-	 * @param Se pasan los datos de un usuario.
-	 * @return Devuelve verdadero(true) si se ha podido aÃ±adir un nuevo usuario y
-	 *         falso(false) si no se puede aÃ±adir un usuario.
+	 * @param Se anotan los datos de un usuario.
+	 * @return Devuelve true si se ha podido añadir un usuario y false si hubo algún error. 
 	 */
 	public boolean añadir_Usuario(Usuario user) {
 		String cadenaSQL = "INSERT INTO usuarios VALUES('" + user.getEmail() + "','" + user.getPassword() + "','"
@@ -45,11 +44,10 @@ public class BD_Usuario extends BD_Conector {
 
 	/**
 	 * 
-	 * @param user
-	 * @param Pasamos el nÃºmero del usuario que se desea eliminar, puede ser un
-	 *                empleado o cliente.
-	 * @return Devuelve verdadero si se ha podido eliminar y falso si no.
+	 * @param Se anota el e-mail
+	 * @return Devuelve true si se ha podido borrar y false si hay hubo error. 
 	 */
+	
 	public boolean borrar_Usuario(Usuario user) {
 		String cadenaSQL = "DELETE FROM usuarios WHERE EMAIL='" + user.getEmail() + "'";
 		String cadena2 = "";
@@ -94,13 +92,10 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 
-	/**
-	 * MÃ©todo que sirve para obtener el rol(cliente,empleado) de un usuario que se
-	 * utilizarÃ¡ para iniciar sesiÃ³n y que dejarÃ¡ ver diferentes menÃºs.
+	/**	
 	 * 
-	 * @param
-	 * @return Devuelve un valor vacÃ­o o null si hay error, y si no hay error
-	 *         devuelve el Rol.
+	 * @param Se anota el email del usuario y su contraseña- 
+	 * @return Devuelve null si hubo un error, un valor vacío si no encuentra el rol y si lo encuentra devuelve el rol. 
 	 */
 
 	public String login(Usuario user) {
@@ -122,15 +117,10 @@ public class BD_Usuario extends BD_Conector {
 
 		}
 	}
-
 	/**
-	 * MÃ©todo que sirve para obtener el puesto de empleados, que solo sean en
-	 * encargado o administrador, donde despuÃ©s podremos ver diferentes menÃºs para
-	 * cada uno.
 	 * 
-	 * @param user
-	 * @return Devuelve un valor vacio o nulo si hay un error, si no hay ninguno de
-	 *         esos devuelve el puesto.
+	 * @param 
+	 * @return Devuelve null si hubo un error, un valor vacío si no encuentra el puesto y si lo encuentra devuelve el puesto. 
 	 */
 	public String loginEncargado(Usuario user) {
 		String cadena = "SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR')";
@@ -150,14 +140,12 @@ public class BD_Usuario extends BD_Conector {
 
 		}
 	}
-
 	/**
 	 * 
-	 * @param user
-	 * @param Se        pasa el parametro campo que esa la opciÃ³n del campo que
-	 *                  queremos editar
-	 * @param contenido es lo que queremos editar
-	 * @return
+	 * @param Se anota el DNI del usuario
+	 * @param Se anota campo para saber la opción que queremos editar
+	 * @param El contenido es la información que va a cambiar
+	 * @return Devuelve -1 si hubo algún error, 0 si no modificó nada y 1 si pudo modificar la información
 	 */
 	public int editarUsuario(Usuario user, int campo, String contenido) {
 		String cadenaSQL = "";
@@ -189,7 +177,6 @@ public class BD_Usuario extends BD_Conector {
 	/**
 	 * Muestra una lista completa de todos los usuarios.
 	 * 
-	 * @return
 	 */
 	public Vector<Usuario> listarUsuarios() {
 		String cadenaSQL = "SELECT * FROM usuarios";
@@ -256,7 +243,6 @@ public class BD_Usuario extends BD_Conector {
 			return -1;
 		}
 	}
-
 	public String validarDNI(Usuario user) {
 		String cadenaSQL = "SELECT DNI FROM usuarios WHERE DNI='" + user.getDni() + "'";
 		try {
@@ -291,29 +277,38 @@ public class BD_Usuario extends BD_Conector {
 			this.cerrar();
 			return -1;
 		}
-	}
+	}	
 
 	public boolean validarDNI(String dni) {
-		if (dni.length() > 9 || dni.length() < 2)
-			// user.getDni().length()>9
-			return false;
-		for (int i = 0; i < dni.length() - 2; i++) {
-			if (dni.charAt(i) < '0' || dni.charAt(i) > '9')
-				return false;
-		}
-		int ultpost = dni.length() - 1;
-		char car = Character.toUpperCase(dni.charAt(ultpost));
-		if (car < 'A' || car > 'Z')
-			return false;
-		return true;
-	}
-
-	public char validarLetraDNI(long num) {
-		final String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-		int resto = (int) (num % 23);
-		return letras.charAt(resto);
-
-	}
+		 
+        boolean correcto = false;
+        int i = 0;
+        int caracter = 0;
+        char letra = ' ';
+        int miDNI = 0;
+        int resto = 0;
+        char[] bLetra = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X','B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+ 
+ 
+        if(dni.length() == 9 && Character.isLetter(dni.charAt(8))) {
+ 
+            do {
+                caracter = dni.codePointAt(i);
+                correcto = (caracter > 47 && caracter < 58);
+                i++;
+            } 
+            while(i < dni.length() - 1 && correcto);     
+        }
+ 
+        if(correcto) {
+            letra = Character.toUpperCase(dni.charAt(8));
+            miDNI = Integer.parseInt(dni.substring(0,8));
+            resto = miDNI % 23;
+            correcto = (letra == bLetra[resto]);
+        }
+ 
+        return correcto;
+    }
 
 	public boolean validarTelefono(String tlf) {
 		if (tlf.length() < 9)
