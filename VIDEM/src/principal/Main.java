@@ -171,9 +171,11 @@ public class Main {
 					case 3:
 						Vector<Compra> ca=bd.compras();
 						for(int i=0;i<ca.size();i++) {
+							System.out.println("Facturas:");
 							System.out.println(ca.get(i));
 							Vector<Linea> la=bd.lineas(co);
 							for(i=0;i<la.size();i++) {
+								System.out.println("Productos:");
 								System.out.println(la.get(i));
 							}
 						}

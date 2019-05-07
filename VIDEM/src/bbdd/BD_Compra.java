@@ -107,7 +107,10 @@ public class BD_Compra extends BD_Conector {
 			return null;		
 		}				
   }
-  
+  /**
+   * Método donde el usuario podrá listar las líneas de sus compras para verlas por pantalla.
+   * @return
+   */
   public Vector<Linea>  lineas(Compra co){
 		Vector <Linea> la=new Vector<Linea>();
 		String cadenaL="SELECT * FROM LINEAS WHERE N_FACTURA = '"+co.getNumFactura()+"'";
