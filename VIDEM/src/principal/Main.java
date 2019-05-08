@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
-
 import bbdd.BD_Compra;
 import bbdd.BD_Usuario;
 import bbdd.BD_Videojuego;
@@ -14,7 +13,7 @@ import modelos.Usuario;
 import modelos.Videojuego;
 /**
  * 
- * @author Gonzalo Fernï¿½ndez
+ * @author Gonzalo Fernandez
  *
  */
 public class Main {
@@ -34,15 +33,15 @@ public class Main {
 		String email,clave;
 		
 		do {
-			System.out.println("1ï¿½ Iniciar Sesiï¿½n");
-			System.out.println("2ï¿½ Registrarse en VIDEM");
+			System.out.println("1º Iniciar Sesiï¿½n");
+			System.out.println("2º Registrarse en VIDEM");
 			int opcIni=sc.nextInt();
 			switch(opcIni) {
 				case 1:
 					sc.nextLine();
 					System.out.println("Introduce tu email");
 					email=sc.nextLine();
-					System.out.println("Introduce tu contraseï¿½a");
+					System.out.println("Introduce tu contraseña");
 					clave=sc.nextLine();
 					user = new Usuario(email,clave);				
 					opc=bbdd.login(user);
@@ -62,7 +61,7 @@ public class Main {
 					System.out.println("Telefono:");
 					int telefono=sc.nextInt();
 					user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
-					if ( bbdd.aï¿½adir_Usuario(user)) {
+					if ( bbdd.añadir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
 						user = new Usuario(email,clave);				
 						opc=bbdd.login(user);
@@ -78,9 +77,9 @@ public class Main {
 			String opc2=bbdd.loginEncargado(user);
 			if(opc2=="ADMINISTRADOR") {
 				do {
-					System.out.println("1ï¿½ Dar de alta empleado");
-					System.out.println("2ï¿½ Dar de baja empleado");
-					System.out.println("3ï¿½ Salir");
+					System.out.println("1º Dar de alta empleado");
+					System.out.println("2º Dar de baja empleado");
+					System.out.println("3º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -101,7 +100,7 @@ public class Main {
 						int numero=bbdd.numEmpleado(user);
 						numero+=1;
 						user = new Empleado(email,clave,nombre,domicilio,dni,puesto,telefono,numero);
-						bbdd.aï¿½adir_Usuario(user);
+						bbdd.añadir_Usuario(user);
 						break;
 					case 2:
 						System.out.println("Correo electronico");
@@ -114,17 +113,17 @@ public class Main {
 			}
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
 				do {
-					System.out.println("1ï¿½ Aï¿½adir videojuego");
-					System.out.println("2ï¿½ Borrar videojuego");
-					System.out.println("3ï¿½ Recuento de ventas");
-					System.out.println("4ï¿½ Listar videojuegos");
-					System.out.println("5ï¿½ Salir");
+					System.out.println("1º Añadir videojuego");
+					System.out.println("2º Borrar videojuego");
+					System.out.println("3º Recuento de ventas");
+					System.out.println("4º Listar videojuegos");
+					System.out.println("5º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
-						System.out.println("Nuevo cï¿½digo de producto: ");
+						System.out.println("Nuevo codigo de producto: ");
 						String codProducto=sc.nextLine();
-						System.out.println("Nuevo tï¿½tulo del videojuego: ");
+						System.out.println("Nuevo titulo del videojuego: ");
 						String titulo=sc.nextLine();
 						System.out.println("Nueva fecha de lanzamiento en formato:dd/mm/aa");
 						String fechaPasada=sc.nextLine();
@@ -138,14 +137,14 @@ public class Main {
 						String plataforma=sc.nextLine();
 						System.out.println("Genero del juego nuevo");
 						String genero=sc.nextLine();
-						System.out.println("Clasificaciï¿½n PEGI: ");
+						System.out.println("Clasificacion PEGI: ");
 						String pegi=sc.nextLine();
 						System.out.println("Unidades disponibles: ");
 						int unidades=sc.nextInt();
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.aï¿½adirJuego(vi)) {
+						if ( bbd.añadirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
@@ -153,7 +152,7 @@ public class Main {
 						}	
 						break;
 					case 2:
-						System.out.println("Cï¿½digo de producto:");
+						System.out.println("Codigo de producto:");
 						codProducto=sc.nextLine();
 						vi = new Videojuego(codProducto);
 						int filas=bbd.borrarVideojuego(vi);
@@ -165,7 +164,7 @@ public class Main {
 								System.out.println("Videojuego eliminado");
 								break;
 							default:
-								System.out.println("En este momento no podemos eliminar. Intï¿½ntalo mï¿½s tarde");
+								System.out.println("En este momento no podemos eliminar. Intentalo mas tarde");
 						}
 						break;
 					case 3:
@@ -190,15 +189,15 @@ public class Main {
 			}
 			else {
 				do {
-					System.out.println("1ï¿½ Aï¿½adir videojuego");
-					System.out.println("2ï¿½ Borrar videojuego");
-					System.out.println("3ï¿½ Salir");
+					System.out.println("1º Añadir videojuego");
+					System.out.println("2º Borrar videojuego");
+					System.out.println("3º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
-						System.out.println("Nuevo cï¿½digo de producto: ");
+						System.out.println("Nuevo codigo de producto: ");
 						String codProducto=sc.nextLine();
-						System.out.println("Nuevo tï¿½tulo del videojuego: ");
+						System.out.println("Nuevo titulo del videojuego: ");
 						String titulo=sc.nextLine();
 						System.out.println("Nueva fecha de lanzamiento en formato:dd/mm/aa");
 						String fechaPasada=sc.nextLine();
@@ -212,14 +211,14 @@ public class Main {
 						String plataforma=sc.nextLine();
 						System.out.println("Genero del juego nuevo");
 						String genero=sc.nextLine();
-						System.out.println("Clasificaciï¿½n PEGI: ");
+						System.out.println("Clasificacion PEGI: ");
 						String pegi=sc.nextLine();
 						System.out.println("Unidades disponibles: ");
 						int unidades=sc.nextInt();
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.aï¿½adirJuego(vi)) {
+						if ( bbd.añadirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
@@ -227,7 +226,7 @@ public class Main {
 						}	
 						break;
 					case 2:
-						System.out.println("Cï¿½digo de producto:");
+						System.out.println("Codigo de producto:");
 						codProducto=sc.nextLine();
 						vi = new Videojuego(codProducto);
 						int filas=bbd.borrarVideojuego(vi);
@@ -248,17 +247,17 @@ public class Main {
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
 			do {
-				System.out.println("1ï¿½ Buscar videojuego");
-				System.out.println("2ï¿½ Hacer compra");
-				System.out.println("3ï¿½ Historial de compras");
-				System.out.println("4ï¿½ Salir.");
+				System.out.println("1º Buscar videojuego");
+				System.out.println("2º Hacer compra");
+				System.out.println("3º Historial de compras");
+				System.out.println("4º Salir.");
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
 						System.out.println("");
 						break;
 					case 2:
-						System.out.println("1ï¿½ Aï¿½adir a compra");
+						System.out.println("1º Añadir a compra");
 						break;
 					case 3:
 						System.out.println("Facturas: ");
@@ -282,4 +281,5 @@ public class Main {
 		}
 
 	}
+}
 	
