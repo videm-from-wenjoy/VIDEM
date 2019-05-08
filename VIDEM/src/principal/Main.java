@@ -33,7 +33,7 @@ public class Main {
 		String email,clave;
 		
 		do {
-			System.out.println("1º Iniciar Sesiï¿½n");
+			System.out.println("1º Iniciar Sesion");
 			System.out.println("2º Registrarse en VIDEM");
 			int opcIni=sc.nextInt();
 			switch(opcIni) {
@@ -191,7 +191,8 @@ public class Main {
 				do {
 					System.out.println("1º Añadir videojuego");
 					System.out.println("2º Borrar videojuego");
-					System.out.println("3º Salir");
+					System.out.println("3º Listar videojuego");
+					System.out.println("4º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -241,8 +242,13 @@ public class Main {
 								System.out.println("En este momento no podemos eliminar. Intï¿½ntalo mï¿½s tarde");
 						}
 						break;
+					case 3:
+						Vector<Videojuego> v=bbd.listarVideojuegos();
+						for(int i=0;i<v.size();i++)
+							System.out.println(v.get(i));
+						break;
 				}
-				}while(opc3!= 3);
+				}while(opc3!= 4);
 			}
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
@@ -254,7 +260,22 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
-						System.out.println("");
+						int opcEdit;
+						do {
+							System.out.println("1º Buscar por codigo de producto:");
+							System.out.println("2º Buscar por titulo y plataforma:");
+							opcEdit=sc.nextInt();
+						}while(opcEdit!=3);
+						if(opcEdit==1) {
+							System.out.println("Codigo de producto:");
+							String codProducto=sc.nextLine();
+							bbd.buscarVideojuego(opcEdit,codProducto);
+						}
+						if(opcEdit==2) {
+							System.out.println("Titulo del videojuego:");
+							String titulo=sc.nextLine();
+							bbd.buscarVideojuego(opcEdit,titulo);
+						}
 						break;
 					case 2:
 						System.out.println("1º Añadir a compra");
@@ -280,6 +301,48 @@ public class Main {
 
 		}
 
+	}
+	
+	public static boolean validarDNI(String dni) {
+		 
+        boolean correcto = false;
+        int i = 0;
+        int caracter = 0;
+        char letra = ' ';
+        int miDNI = 0;
+        int resto = 0;
+        char[] bLetra = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X','B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+ 
+ 
+        if(dni.length() == 9 && Character.isLetter(dni.charAt(8))) {
+ 
+            do {
+                caracter = dni.codePointAt(i);
+                correcto = (caracter > 47 && caracter < 58);
+                i++;
+            } 
+            while(i < dni.length() - 1 && correcto);     
+        }
+ 
+        if(correcto) {
+            letra = Character.toUpperCase(dni.charAt(8));
+            miDNI = Integer.parseInt(dni.substring(0,8));
+            resto = miDNI % 23;
+            correcto = (letra == bLetra[resto]);
+        }
+ 
+        return correcto;
+    }
+
+	public static boolean validarTelefono(String tlf) {
+		if (tlf.length() < 9)
+			return false;
+		try {
+			Integer.parseInt(tlf);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 }
 	
