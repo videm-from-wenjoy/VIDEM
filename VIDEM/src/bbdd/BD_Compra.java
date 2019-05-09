@@ -3,6 +3,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+
+import modelos.Cliente;
 import modelos.Compra;
 import modelos.Linea;
 
@@ -89,9 +91,9 @@ public class BD_Compra extends BD_Conector {
    * Método donde el usuario podrá listar sus comprar para verlas por pantalla.
    * @return
    */
-  public Vector<Compra>  comprasPropias(){
+  public Vector<Compra>  comprasPropias(Cliente cl){
 		Vector <Compra> ca=new Vector<Compra>();
-		String cadenaC="SELECT * FROM COMPRAS WHERE N_Socio ='"f"'";
+		String cadenaC="SELECT * FROM COMPRAS WHERE N_Socio ='"+cl.getNumCliente()+"'";
 		try{	
 			this.abrir();
 			s=c.createStatement();

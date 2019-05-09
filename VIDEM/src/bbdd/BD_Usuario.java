@@ -204,7 +204,7 @@ public class BD_Usuario extends BD_Conector {
 	 * @param user
 	 * @return
 	 */
-	public int numEmpleado(Usuario user){
+	public int asignarNumEmpleado(Usuario user){
 		String cadena="SELECT MAX(N_EMPLEADO) FROM empleados";
 		try{
 			int t=0;
@@ -226,7 +226,7 @@ public class BD_Usuario extends BD_Conector {
 	 * @param user
 	 * @return
 	 */
-	public int numCliente(Usuario user){
+	public int asignarNumCliente(Usuario user){
 		String cadena="SELECT MAX(N_SOCIO) FROM clientes";
 		try{
 			int t=0;

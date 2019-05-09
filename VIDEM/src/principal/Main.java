@@ -6,6 +6,7 @@ import java.util.*;
 import bbdd.BD_Compra;
 import bbdd.BD_Usuario;
 import bbdd.BD_Videojuego;
+import modelos.Cliente;
 import modelos.Compra;
 import modelos.Empleado;
 import modelos.Linea;
@@ -24,6 +25,7 @@ public class Main {
 		Usuario user=null;
 		Videojuego vi;
 		Compra co=null;
+		Cliente cl=null;
 		BD_Usuario bbdd=new BD_Usuario("videm");
 		BD_Videojuego bbd=new BD_Videojuego("videm");
 		BD_Compra bd=new BD_Compra("videm");
@@ -60,7 +62,10 @@ public class Main {
 					String domicilio=sc.nextLine();
 					System.out.println("Telefono:");
 					int telefono=sc.nextInt();
-					user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
+					int numero=bbdd.asignarNumCliente(user);
+					numero+=1;
+					user = new Cliente(email,clave,nombre,domicilio,dni,"CLIENTE",telefono,numero);
+					bbdd.añadir_Usuario(user);
 					if ( bbdd.añadir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
 						user = new Usuario(email,clave);				
@@ -100,9 +105,9 @@ public class Main {
 						int telefono=sc.nextInt();
 						System.out.println("Puesto:");
 						String puesto=sc.nextLine();
-						int numero=bbdd.numEmpleado(user);
+						int numero=bbdd.asignarNumEmpleado(user);
 						numero+=1;
-						user = new Empleado(email,clave,nombre,domicilio,dni,puesto,telefono,numero);
+						user = new Empleado(email,clave,nombre,domicilio,dni,"EMPLEADO",telefono,numero,puesto);
 						bbdd.añadir_Usuario(user);
 						break;
 					case 2:
@@ -292,7 +297,7 @@ public class Main {
 					case 3:
 						System.out.println("Facturas: ");
 						System.out.println();
-						Vector<Compra> ca=bd.compras();
+						Vector<Compra> ca=bd.comprasPropias(cl);
 						for(int i=0;i<ca.size();i++) {
 							System.out.println(ca.get(i));
 							Vector<Linea> la=bd.lineas(co);
