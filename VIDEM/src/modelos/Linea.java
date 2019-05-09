@@ -35,5 +35,11 @@ public class Linea {
 
 	public double getPrecio() {
 		return precio;
+	}
+
+	@Override
+	public String toString() {
+		return "Linea [numFactura=" + numFactura + ", codProducto=" + codProducto + ", unidades=" + unidades
+				+ ", precio=" + precio + "]";
 	} 
 }

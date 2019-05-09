@@ -279,45 +279,4 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}	
 
-	public boolean validarDNI(String dni) {
-		 
-        boolean correcto = false;
-        int i = 0;
-        int caracter = 0;
-        char letra = ' ';
-        int miDNI = 0;
-        int resto = 0;
-        char[] bLetra = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X','B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
- 
- 
-        if(dni.length() == 9 && Character.isLetter(dni.charAt(8))) {
- 
-            do {
-                caracter = dni.codePointAt(i);
-                correcto = (caracter > 47 && caracter < 58);
-                i++;
-            } 
-            while(i < dni.length() - 1 && correcto);     
-        }
- 
-        if(correcto) {
-            letra = Character.toUpperCase(dni.charAt(8));
-            miDNI = Integer.parseInt(dni.substring(0,8));
-            resto = miDNI % 23;
-            correcto = (letra == bLetra[resto]);
-        }
- 
-        return correcto;
-    }
-
-	public boolean validarTelefono(String tlf) {
-		if (tlf.length() < 9)
-			return false;
-		try {
-			Integer.parseInt(tlf);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return true;
-	}
 }

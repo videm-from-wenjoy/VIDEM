@@ -91,7 +91,7 @@ public class BD_Compra extends BD_Conector {
    */
   public Vector<Compra>  comprasPropias(){
 		Vector <Compra> ca=new Vector<Compra>();
-		String cadenaC="SELECT * FROM COMPRAS";
+		String cadenaC="SELECT * FROM COMPRAS WHERE N_Socio ='"f"'";
 		try{	
 			this.abrir();
 			s=c.createStatement();

@@ -79,7 +79,10 @@ public class Main {
 				do {
 					System.out.println("1º Dar de alta empleado");
 					System.out.println("2º Dar de baja empleado");
-					System.out.println("3º Salir");
+					System.out.println("3º Listar usuarios");
+					System.out.println("4º Listar empleados");
+					System.out.println("5º Listar clientes");
+					System.out.println("6º Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -108,8 +111,14 @@ public class Main {
 						user = new Empleado(email);
 						bbdd.borrar_Usuario(user);
 						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
 				}
-				}while(opc3!= 4);
+				}while(opc3!= 6);
 			}
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
 				do {
@@ -334,14 +343,9 @@ public class Main {
         return correcto;
     }
 
-	public static boolean validarTelefono(String tlf) {
-		if (tlf.length() < 9)
+	public static boolean validarTelefono(int tlf) {
+		if (tlf>999999999 && tlf<100000000)
 			return false;
-		try {
-			Integer.parseInt(tlf);
-		} catch (NumberFormatException e) {
-			return false;
-		}
 		return true;
 	}
 }
