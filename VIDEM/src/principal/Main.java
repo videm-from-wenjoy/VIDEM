@@ -32,7 +32,7 @@ public class Main {
 		String opc=null;
 		int opc3;
 		LocalDate lanzamiento=null;
-		String email,clave;
+		String email = null,clave;
 		
 		do {
 			System.out.println("1º Iniciar Sesion");
@@ -79,8 +79,9 @@ public class Main {
 		}while(opc==null);
 		
 		if(opc.equalsIgnoreCase("EMPLEADO")) {
+			user = new Usuario(email);
 			String opc2=bbdd.loginEncargado(user);
-			if(opc2=="ADMINISTRADOR") {
+			if(opc2.equalsIgnoreCase("ADMINISTRADOR")) {
 				do {
 					System.out.println("1º Dar de alta empleado");
 					System.out.println("2º Dar de baja empleado");
@@ -126,7 +127,7 @@ public class Main {
 						break;
 				}
 				}while(opc3!= 6);
-			}
+			}else
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
 				do {
 					System.out.println("1º Añadir videojuego");

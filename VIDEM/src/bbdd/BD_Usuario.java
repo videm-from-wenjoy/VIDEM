@@ -123,7 +123,7 @@ public class BD_Usuario extends BD_Conector {
 	 * @return Devuelve null si hubo un error, un valor vacío si no encuentra el puesto y si lo encuentra devuelve el puesto. 
 	 */
 	public String loginEncargado(Usuario user) {
-		String cadena = "SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR')";
+		String cadena = "SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR') AND EMAIL='"+user.getEmail()+"'";
 		try {
 			String t = "";
 			this.abrir();
