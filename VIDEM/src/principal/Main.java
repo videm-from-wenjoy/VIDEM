@@ -80,7 +80,7 @@ public class Main {
 		
 		if(opc.equalsIgnoreCase("EMPLEADO")) {
 			String opc2=bbdd.loginEncargado(user);
-			if(opc2=="ADMINISTRADOR") {
+			if(opc2.equalsIgnoreCase("ADMINISTRADOR")) {
 				do {
 					System.out.println("1º Dar de alta empleado");
 					System.out.println("2º Dar de baja empleado");
