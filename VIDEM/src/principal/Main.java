@@ -280,22 +280,22 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
-						sc.nextLine();
 						int opcEdit;
 						do {
 							System.out.println("1º Buscar por codigo de producto:");
 							System.out.println("2º Buscar por titulo y plataforma:");
 							opcEdit=sc.nextInt();
-						}while(opcEdit!=3);
+							sc.nextLine();
+						}while(opcEdit!=1 && opcEdit!=2);
 						if(opcEdit==1) {
 							System.out.println("Codigo de producto:");
 							String codProducto=sc.nextLine();
-							bbd.buscarVideojuego(opcEdit,codProducto);
+							System.out.println(bbd.buscarVideojuego(opcEdit,codProducto));
 						}
 						if(opcEdit==2) {
 							System.out.println("Titulo del videojuego:");
 							String titulo=sc.nextLine();
-							bbd.buscarVideojuego(opcEdit,titulo);
+							System.out.println(bbd.buscarVideojuego(opcEdit,titulo));
 						}
 						break;
 					case 2:

@@ -97,12 +97,14 @@ public class BD_Videojuego extends BD_Conector {
 		Vector<Videojuego> v=new Vector<Videojuego>();
 		Scanner sc=new Scanner(System.in);
 		String cadenaSQL="";		
-		if(campo==1)
+		if(campo==1) {
 			cadenaSQL="SELECT * FROM videojuegos WHERE COD_PRODUCTO='"+contenido+"'";
-		if(campo==2)
+		}
+		if(campo==2) {
 			System.out.println("Anota la plataforma del juego: ");
 			String plataforma=sc.nextLine();
 			cadenaSQL="SELECT * FROM videojuegos WHERE TITULO='"+contenido+"' AND PLATAFORMA='"+plataforma+"'";
+		}
 		try {
 			this.abrir();
 			s = c.createStatement();
