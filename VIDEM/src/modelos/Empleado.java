@@ -21,14 +21,10 @@ public class Empleado extends Usuario{
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public Empleado(String emaill, String clavee) {
 		super(emaill, clavee);
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public int getNumEmpleado() {
 		return numEmpleado;
@@ -37,6 +33,13 @@ public class Empleado extends Usuario{
 	public void setNumEmpleado(int numEmpleado) {
 		this.numEmpleado = numEmpleado;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Empleado [numEmpleado=" + numEmpleado + ", puesto=" + puesto + ", getEmail()=" + getEmail()
+				+ ", getPassword()=" + getPassword() + ", getNombre()=" + getNombre() + ", getDomicilio()="
+				+ getDomicilio() + ", getDni()=" + getDni() + ", getRol()=" + getRol() + ", getTelefono()="
+				+ getTelefono() + "]";
+	}
 	
 }

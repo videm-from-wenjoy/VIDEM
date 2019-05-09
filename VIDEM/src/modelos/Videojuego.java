@@ -67,7 +67,13 @@ public class Videojuego {
 
 		public double getPrecio() {
 			return precio;
+		}
+
+		@Override
+		public String toString() {
+			return "Videojuego [codProducto=" + codProducto + ", titulo=" + titulo + ", lanzamiento=" + lanzamiento
+					+ ", plataforma=" + plataforma + ", genero=" + genero + ", pegi=" + pegi + ", unidades=" + unidades
+					+ ", precio=" + precio + "]";
 		} 
-		
 		
 }

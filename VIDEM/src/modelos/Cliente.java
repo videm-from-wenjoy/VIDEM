@@ -21,6 +21,12 @@ public class Cliente extends Usuario{
 	public void setNumCliente(int numCliente) {
 		this.numCliente = numCliente;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cliente [numCliente=" + numCliente + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
+				+ ", getNombre()=" + getNombre() + ", getDomicilio()=" + getDomicilio() + ", getDni()=" + getDni()
+				+ ", getRol()=" + getRol() + ", getTelefono()=" + getTelefono() + "]";
+	}
 	
 }
