@@ -26,7 +26,7 @@ public class BD_Usuario extends BD_Conector {
 	 */
 	public boolean añadir_Usuario(Usuario user) {
 		String cadenaSQL = "INSERT INTO usuarios VALUES('" + user.getEmail() + "','" + user.getPassword() + "','"
-				+ user.getNombre() + "','" + user.getDomicilio() + "','" + user.getDni() + "','" + user.getRol() + "','"
+				+ user.getRol() + "','" + user.getNombre() + "','" + user.getDni() + "','" + user.getDomicilio() + "','"
 				+ user.getTelefono() + "')";
 		try {
 			this.abrir();

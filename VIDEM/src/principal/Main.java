@@ -91,6 +91,7 @@ public class Main {
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
+						sc.nextLine();
 						System.out.println("Correo electronico");
 						email=sc.nextLine();
 						System.out.println("Clave personal:");
@@ -111,6 +112,7 @@ public class Main {
 						bbdd.añadir_Usuario(user);
 						break;
 					case 2:
+						sc.nextLine();
 						System.out.println("Correo electronico");
 						email=sc.nextLine();
 						user = new Empleado(email);
@@ -135,6 +137,7 @@ public class Main {
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
+						sc.nextLine();
 						System.out.println("Nuevo codigo de producto: ");
 						String codProducto=sc.nextLine();
 						System.out.println("Nuevo titulo del videojuego: ");
@@ -166,6 +169,7 @@ public class Main {
 						}	
 						break;
 					case 2:
+						sc.nextLine();
 						System.out.println("Codigo de producto:");
 						codProducto=sc.nextLine();
 						vi = new Videojuego(codProducto);
@@ -210,6 +214,7 @@ public class Main {
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
+						sc.nextLine();
 						System.out.println("Nuevo codigo de producto: ");
 						String codProducto=sc.nextLine();
 						System.out.println("Nuevo titulo del videojuego: ");
@@ -241,6 +246,7 @@ public class Main {
 						}	
 						break;
 					case 2:
+						sc.nextLine();
 						System.out.println("Codigo de producto:");
 						codProducto=sc.nextLine();
 						vi = new Videojuego(codProducto);
@@ -274,6 +280,7 @@ public class Main {
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
+						sc.nextLine();
 						int opcEdit;
 						do {
 							System.out.println("1º Buscar por codigo de producto:");
@@ -292,9 +299,11 @@ public class Main {
 						}
 						break;
 					case 2:
+						sc.nextLine();
 						System.out.println("1º Añadir a compra");
 						break;
 					case 3:
+						sc.nextLine();
 						System.out.println("Facturas: ");
 						System.out.println();
 						Vector<Compra> ca=bd.comprasPropias(cl);
