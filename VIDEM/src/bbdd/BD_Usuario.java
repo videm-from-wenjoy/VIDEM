@@ -123,6 +123,7 @@ public class BD_Usuario extends BD_Conector {
 		String cadena = "SELECT PUESTO FROM empleados WHERE PUESTO IN ('ENCARGADO','ADMINISTRADOR') AND EMAIL='"+user.getEmail()+"'";
 		try {
 			String t = "";
+			//
 			this.abrir();
 			s = c.createStatement();
 			reg = s.executeQuery(cadena);

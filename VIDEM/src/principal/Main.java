@@ -32,18 +32,18 @@ public class Main {
 		String opc=null;
 		int opc3;
 		LocalDate lanzamiento=null;
-		String email,clave;
+		String email = null,clave;
 		
 		do {
-			System.out.println("1º Iniciar Sesion");
-			System.out.println("2º Registrarse en VIDEM");
+			System.out.println("1Âº Iniciar Sesion");
+			System.out.println("2Âº Registrarse en VIDEM");
 			int opcIni=sc.nextInt();
 			switch(opcIni) {
 				case 1:
 					sc.nextLine();
 					System.out.println("Introduce tu email");
 					email=sc.nextLine();
-					System.out.println("Introduce tu contraseña");
+					System.out.println("Introduce tu contraseÃ±a");
 					clave=sc.nextLine();
 					user = new Usuario(email,clave);				
 					opc=bbdd.login(user);
@@ -65,29 +65,31 @@ public class Main {
 					int numero=bbdd.asignarNumCliente(user);
 					numero+=1;
 					user = new Cliente(email,clave,nombre,domicilio,dni,"CLIENTE",telefono,numero);
-					bbdd.añadir_Usuario(user);
-					if ( bbdd.añadir_Usuario(user)) {
+					bbdd.aÃ±adir_Usuario(user);
+					if ( bbdd.aÃ±adir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
 						user = new Usuario(email,clave);				
 						opc=bbdd.login(user);
 					}
 					else {
-						System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mï¿½s tarde.");
+						System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mÃ¯Â¿Â½s tarde.");
 					}
 					break;
 			}
 		}while(opc==null);
 		
 		if(opc.equalsIgnoreCase("EMPLEADO")) {
+			user = new Usuario(email);
 			String opc2=bbdd.loginEncargado(user);
+
 			if(opc2.equalsIgnoreCase("ADMINISTRADOR")) {
 				do {
-					System.out.println("1º Dar de alta empleado");
-					System.out.println("2º Dar de baja empleado");
-					System.out.println("3º Listar usuarios");
-					System.out.println("4º Listar empleados");
-					System.out.println("5º Listar clientes");
-					System.out.println("6º Salir");
+					System.out.println("1Âº Dar de alta empleado");
+					System.out.println("2Âº Dar de baja empleado");
+					System.out.println("3Âº Listar usuarios");
+					System.out.println("4Âº Listar empleados");
+					System.out.println("5Âº Listar clientes");
+					System.out.println("6Âº Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -109,7 +111,7 @@ public class Main {
 						int numero=bbdd.asignarNumEmpleado(user);
 						numero+=1;
 						user = new Empleado(email,clave,nombre,domicilio,dni,"EMPLEADO",telefono,numero,puesto);
-						bbdd.añadir_Usuario(user);
+						bbdd.aÃ±adir_Usuario(user);
 						break;
 					case 2:
 						sc.nextLine();
@@ -138,14 +140,14 @@ public class Main {
 						break;
 				}
 				}while(opc3!= 6);
-			}
+			}else
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
 				do {
-					System.out.println("1º Añadir videojuego");
-					System.out.println("2º Borrar videojuego");
-					System.out.println("3º Recuento de ventas");
-					System.out.println("4º Listar videojuegos");
-					System.out.println("5º Salir");
+					System.out.println("1Âº AÃ±adir videojuego");
+					System.out.println("2Âº Borrar videojuego");
+					System.out.println("3Âº Recuento de ventas");
+					System.out.println("4Âº Listar videojuegos");
+					System.out.println("5Âº Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -173,11 +175,11 @@ public class Main {
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.añadirJuego(vi)) {
+						if ( bbd.aÃ±adirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
-							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mï¿½s tarde.");
+							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mÃ¯Â¿Â½s tarde.");
 						}	
 						break;
 					case 2:
@@ -219,10 +221,10 @@ public class Main {
 			}
 			else {
 				do {
-					System.out.println("1º Añadir videojuego");
-					System.out.println("2º Borrar videojuego");
-					System.out.println("3º Listar videojuego");
-					System.out.println("4º Salir");
+					System.out.println("1Âº AÃ±adir videojuego");
+					System.out.println("2Âº Borrar videojuego");
+					System.out.println("3Âº Listar videojuego");
+					System.out.println("4Âº Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -250,7 +252,7 @@ public class Main {
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.añadirJuego(vi)) {
+						if ( bbd.aÃ±adirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
@@ -285,17 +287,17 @@ public class Main {
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
 			do {
-				System.out.println("1º Buscar videojuego");
-				System.out.println("2º Hacer compra");
-				System.out.println("3º Historial de compras");
-				System.out.println("4º Salir.");
+				System.out.println("1Âº Buscar videojuego");
+				System.out.println("2Âº Hacer compra");
+				System.out.println("3Âº Historial de compras");
+				System.out.println("4Âº Salir.");
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
 						int opcEdit;
 						do {
-							System.out.println("1º Buscar por codigo de producto:");
-							System.out.println("2º Buscar por titulo y plataforma:");
+							System.out.println("1Âº Buscar por codigo de producto:");
+							System.out.println("2Âº Buscar por titulo y plataforma:");
 							opcEdit=sc.nextInt();
 							sc.nextLine();
 						}while(opcEdit!=1 && opcEdit!=2);
@@ -312,7 +314,7 @@ public class Main {
 						break;
 					case 2:
 						sc.nextLine();
-						System.out.println("1º Añadir a compra");
+						System.out.println("1Âº AÃ±adir a compra");
 						break;
 					case 3:
 						sc.nextLine();
