@@ -237,7 +237,7 @@ public class Main {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
-							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo m�s tarde.");
+							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mas tarde.");
 						}	
 						break;
 					case 2:
@@ -253,7 +253,7 @@ public class Main {
 								System.out.println("Videojuego eliminado");
 								break;
 							default:
-								System.out.println("En este momento no podemos eliminar. Int�ntalo m�s tarde");
+								System.out.println("En este momento no podemos eliminar. Intentalo mas tarde");
 						}
 						break;
 					case 3:
