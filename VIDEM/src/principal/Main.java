@@ -119,10 +119,22 @@ public class Main {
 						bbdd.borrar_Usuario(user);
 						break;
 					case 3:
+						Vector <Usuario> usu2= bbdd.listarUsuarios();
+						for(int i=0;i<usu2.size();i++) {
+							System.out.println(usu2.get(i));
+						}
 						break;
 					case 4:
+						Vector <Empleado> emp2= bbdd.listarEmpleados();
+						for(int i=0;i<emp2.size();i++) {
+							System.out.println(emp2.get(i));
+						}
 						break;
 					case 5:
+						Vector<Cliente> cli2= bbdd.listarClientes(); 
+						for(int i=0;i<cli2.size();i++) {
+							System.out.println(cli2.get(i));
+						}
 						break;
 				}
 				}while(opc3!= 6);

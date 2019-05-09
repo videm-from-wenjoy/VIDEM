@@ -195,6 +195,48 @@ public class BD_Usuario extends BD_Conector {
 			return null;
 		}
 	}
+	
+	public Vector<Empleado> listarEmpleados() {
+		String cadenaSQL = "SELECT * FROM empleados";
+		Vector<Empleado> emp = new Vector<Empleado>();
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				emp.add(new Empleado(reg.getString("EMAIL"), reg.getString("PASSWORD"), reg.getString("ROL"),
+						reg.getString("NOMBRE"), reg.getString("DNI"), reg.getString("DIRECCION"),
+						reg.getInt("TELEFONO"), reg.getInt("NUMEMPLEADO"), reg.getString("PUESTO")));
+			}
+			s.close();
+			this.cerrar();
+			return emp;
+		} catch (SQLException e) {
+			this.cerrar();
+			return null;
+		}
+	}
+	
+	public Vector<Cliente> listarClientes() {
+		String cadenaSQL = "SELECT * FROM clientes";
+		Vector<Cliente> cli = new Vector<Cliente>();
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				cli.add(new Cliente(reg.getString("EMAIL"), reg.getString("PASSWORD"), reg.getString("ROL"),
+						reg.getString("NOMBRE"), reg.getString("DNI"), reg.getString("DIRECCION"),
+						reg.getInt("TELEFONO"),reg.getInt("N_SOCIO")));
+			}
+			s.close();
+			this.cerrar();
+			return cli;
+		} catch (SQLException e) {
+			this.cerrar();
+			return null;
+		}
+	}	
 
 	/**
 	 * 
