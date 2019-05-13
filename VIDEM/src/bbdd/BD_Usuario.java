@@ -38,6 +38,37 @@ public class BD_Usuario extends BD_Conector {
 		}
 
 	}
+	
+	public boolean añadir_Empleado(Empleado emp) {
+		String cadenaSQL = "INSERT INTO empleados VALUES('" + emp.getEmail() + "','" + emp.getNumEmpleado() + "','"
+				+ emp.getPuesto() + "')";
+		try {
+			this.abrir();
+			s = c.createStatement();
+			s.executeQuery(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return true;
+		} catch (SQLException e) {
+			this.cerrar();
+			return false;
+		}
+	}
+	
+	public boolean añadir_Cliente(Cliente cl) {
+		String cadenaSQL = "INSERT INTO clietes VALUES('" + cl.getNumCliente() + "','" + cl.getEmail() + "')";
+		try {
+			this.abrir();
+			s = c.createStatement();
+			s.executeQuery(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return true;
+		} catch (SQLException e) {
+			this.cerrar();
+			return false;
+		}
+	}
 
 	/**
 	 * 
@@ -204,9 +235,7 @@ public class BD_Usuario extends BD_Conector {
 			s = c.createStatement();
 			reg = s.executeQuery(cadenaSQL);
 			while (reg.next()) {
-				emp.add(new Empleado(reg.getString("EMAIL"), reg.getString("PASSWORD"), reg.getString("ROL"),
-						reg.getString("NOMBRE"), reg.getString("DNI"), reg.getString("DIRECCION"),
-						reg.getInt("TELEFONO"), reg.getInt("NUMEMPLEADO"), reg.getString("PUESTO")));
+				emp.add(new Empleado(reg.getString("EMAIL"), reg.getInt("N_EMPLEADO"), reg.getString("PUESTO")));
 			}
 			s.close();
 			this.cerrar();
@@ -225,9 +254,7 @@ public class BD_Usuario extends BD_Conector {
 			s = c.createStatement();
 			reg = s.executeQuery(cadenaSQL);
 			while (reg.next()) {
-				cli.add(new Cliente(reg.getString("EMAIL"), reg.getString("PASSWORD"), reg.getString("ROL"),
-						reg.getString("NOMBRE"), reg.getString("DNI"), reg.getString("DIRECCION"),
-						reg.getInt("TELEFONO"),reg.getInt("N_SOCIO")));
+				cli.add(new Cliente(reg.getString("EMAIL"), reg.getInt("N_SOCIO")));
 			}
 			s.close();
 			this.cerrar();

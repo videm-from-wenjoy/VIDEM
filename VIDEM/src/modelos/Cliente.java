@@ -8,9 +8,8 @@ package modelos;
 public class Cliente extends Usuario{
 	private int numCliente;
 
-	public Cliente(String email, String password, String nombre, String domicilio, String dni, String rol, int telefono,
-			int numCliente) {
-		super(email, password, nombre, domicilio, dni, rol, telefono);
+	public Cliente(String email, int numCliente) {
+		super(email);
 		this.numCliente = numCliente;
 	}
 
@@ -24,9 +23,9 @@ public class Cliente extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Cliente [numCliente=" + numCliente + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
-				+ ", getNombre()=" + getNombre() + ", getDomicilio()=" + getDomicilio() + ", getDni()=" + getDni()
-				+ ", getRol()=" + getRol() + ", getTelefono()=" + getTelefono() + "]";
+		return "Cliente [numCliente=" + numCliente + ", getEmail()=" + getEmail() + "]";
 	}
+
+	
 	
 }
