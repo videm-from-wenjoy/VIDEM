@@ -65,8 +65,8 @@ public class Main {
 					int numero=bbdd.asignarNumCliente(user);
 					numero+=1;
 					user = new Cliente(email,clave,nombre,domicilio,dni,"CLIENTE",telefono,numero);
-					bbdd.aÃ±adir_Usuario(user);
-					if ( bbdd.aÃ±adir_Usuario(user)) {
+					bbdd.añadir_Usuario(user);
+					if ( bbdd.añadir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
 						user = new Usuario(email,clave);				
 						opc=bbdd.login(user);
@@ -111,7 +111,7 @@ public class Main {
 						int numero=bbdd.asignarNumEmpleado(user);
 						numero+=1;
 						user = new Empleado(email,clave,nombre,domicilio,dni,"EMPLEADO",telefono,numero,puesto);
-						bbdd.aÃ±adir_Usuario(user);
+						bbdd.añadir_Usuario(user);
 						break;
 					case 2:
 						sc.nextLine();
@@ -175,7 +175,7 @@ public class Main {
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.aÃ±adirJuego(vi)) {
+						if ( bbd.añadirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
@@ -252,7 +252,7 @@ public class Main {
 						System.out.println("Precio por unidad: ");
 						double precio=sc.nextDouble();
 						vi = new Videojuego(codProducto,titulo,lanzamiento,plataforma,genero,pegi,unidades,precio);
-						if ( bbd.aÃ±adirJuego(vi)) {
+						if ( bbd.añadirJuego(vi)) {
 							System.out.println("Se ha dado de alta en VIDEM");				
 						}
 						else {
@@ -314,7 +314,32 @@ public class Main {
 						break;
 					case 2:
 						sc.nextLine();
-						System.out.println("1Âº AÃ±adir a compra");
+						String res;
+						do {
+						System.out.println("Seleccione el nombre del videojuego a comprar");
+						String nom=sc.nextLine();
+						System.out.println("Selecciona la plataforma del videojuego");
+						String plataforma=sc.nextLine();
+						System.out.println("Selecciona el número de unidades");
+						int unidades=sc.nextInt();
+			
+						double precio = bbd.buscarPrecio(nom, plataforma, unidades);
+						if(precio==-1) {
+							System.err.println("Error, no se ha encontrado un juego en esa plataforma. "
+									+ "Revise si ha puesto bien titulo o la plataforma.");
+							break;
+						}
+						double preciocarrito=0;
+					    double precioF= precio * unidades;
+					    preciocarrito= preciocarrito + precioF;
+						
+						
+						System.out.println("¿Desea comprar algun objeto más?");
+						res=sc.nextLine();
+						}while(res.equalsIgnoreCase("si"));
+						
+						
+						
 						break;
 					case 3:
 						sc.nextLine();
