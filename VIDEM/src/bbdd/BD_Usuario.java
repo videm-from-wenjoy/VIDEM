@@ -28,7 +28,7 @@ public class BD_Usuario extends BD_Conector {
 		try {
 			this.abrir();
 			s = c.createStatement();
-			s.executeQuery(cadenaSQL);
+			s.executeUpdate(cadenaSQL);
 			s.close();
 			this.cerrar();
 			return true;
@@ -45,7 +45,7 @@ public class BD_Usuario extends BD_Conector {
 		try {
 			this.abrir();
 			s = c.createStatement();
-			s.executeQuery(cadenaSQL);
+			s.executeUpdate(cadenaSQL);
 			s.close();
 			this.cerrar();
 			return true;
@@ -60,7 +60,7 @@ public class BD_Usuario extends BD_Conector {
 		try {
 			this.abrir();
 			s = c.createStatement();
-			s.executeQuery(cadenaSQL);
+			s.executeUpdate(cadenaSQL);
 			s.close();
 			this.cerrar();
 			return true;
