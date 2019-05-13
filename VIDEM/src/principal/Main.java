@@ -66,14 +66,14 @@ public class Main {
 					int numero=bbdd.asignarNumCliente(user);
 					numero+=1;
 					user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
-					
+					//
 					if ( bbdd.añadir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
 					}
 					else {
 						System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mï¿½s tarde.");
 					}
-					
+					cl = new Cliente(email,numero);
 					
 					if ( bbdd.añadir_Cliente(cl)) {
 						System.out.println("Se ha dado de alta en clientes de VIDEM");

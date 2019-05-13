@@ -54,7 +54,11 @@ public class BD_Usuario extends BD_Conector {
 			return false;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param cl
+	 * @return
+	 */
 	public boolean añadir_Cliente(Cliente cl) {
 		String cadenaSQL = "INSERT INTO clientes VALUES('" + cl.getNumCliente() + "','" + cl.getEmail() + "')";
 		try {
@@ -84,7 +88,7 @@ public class BD_Usuario extends BD_Conector {
 			try {
 				this.abrir();
 				s = c.createStatement();
-				s.executeQuery(cadena2);
+				s.executeUpdate(cadena2);
 				s.close();
 				this.cerrar();
 				return true;
@@ -98,7 +102,7 @@ public class BD_Usuario extends BD_Conector {
 			try {
 				this.abrir();
 				s = c.createStatement();
-				s.executeQuery(cadena2);
+				s.executeUpdate(cadena2);
 				s.close();
 				this.cerrar();
 				return true;
@@ -110,7 +114,7 @@ public class BD_Usuario extends BD_Conector {
 		try {
 			this.abrir();
 			s = c.createStatement();
-			s.executeQuery(cadenaSQL);
+			s.executeUpdate(cadenaSQL);
 			s.close();
 			this.cerrar();
 			return true;
