@@ -12,6 +12,10 @@ public class Cliente extends Usuario{
 		super(email);
 		this.numCliente = numCliente;
 	}
+	
+	public Cliente(String email) {
+		super(email);
+	}
 
 	public int getNumCliente() {
 		return numCliente;

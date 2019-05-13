@@ -236,7 +236,7 @@ public class Main {
 					}
 				}while(opc3!= 5);
 			}
-			else {
+			if(opc2.equalsIgnoreCase("EMPLEADO")) {
 				do {
 					System.out.println("1º Añadir videojuego");
 					System.out.println("2º Borrar videojuego");
@@ -336,7 +336,7 @@ public class Main {
 					case 3:
 						sc.nextLine();
 						System.out.println("Facturas: ");
-						System.out.println();
+						cl = new Cliente(user.getEmail());
 						Vector<Compra> ca=bd.comprasPropias(cl);
 						for(int i=0;i<ca.size();i++) {
 							System.out.println(ca.get(i));

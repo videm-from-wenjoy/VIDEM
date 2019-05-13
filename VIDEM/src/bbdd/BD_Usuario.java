@@ -56,7 +56,7 @@ public class BD_Usuario extends BD_Conector {
 	}
 	
 	public boolean añadir_Cliente(Cliente cl) {
-		String cadenaSQL = "INSERT INTO clietes VALUES('" + cl.getNumCliente() + "','" + cl.getEmail() + "')";
+		String cadenaSQL = "INSERT INTO clientes VALUES('" + cl.getNumCliente() + "','" + cl.getEmail() + "')";
 		try {
 			this.abrir();
 			s = c.createStatement();
