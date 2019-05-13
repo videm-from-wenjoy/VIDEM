@@ -9,9 +9,8 @@ public class Empleado extends Usuario{
 	private int numEmpleado;
 	private String puesto;
 
-	public Empleado(String email, String password, String nombre, String domicilio, String dni, String rol,
-			int telefono, int numEmpleado, String puesto) {
-		super(email, password, nombre, domicilio, dni, rol, telefono);
+	public Empleado(String email, int numEmpleado, String puesto) {
+		super(email);
 		this.numEmpleado = numEmpleado;
 		this.puesto = puesto;
 	}
@@ -34,12 +33,13 @@ public class Empleado extends Usuario{
 		this.numEmpleado = numEmpleado;
 	}
 
+	public String getPuesto() {
+		return puesto;
+	}
+
 	@Override
 	public String toString() {
-		return "Empleado [numEmpleado=" + numEmpleado + ", puesto=" + puesto + ", getEmail()=" + getEmail()
-				+ ", getPassword()=" + getPassword() + ", getNombre()=" + getNombre() + ", getDomicilio()="
-				+ getDomicilio() + ", getDni()=" + getDni() + ", getRol()=" + getRol() + ", getTelefono()="
-				+ getTelefono() + "]";
+		return "Empleado [numEmpleado=" + numEmpleado + ", puesto=" + puesto + "]";
 	}
 	
 }

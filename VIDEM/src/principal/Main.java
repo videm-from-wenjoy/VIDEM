@@ -26,6 +26,7 @@ public class Main {
 		Videojuego vi;
 		Compra co=null;
 		Cliente cl=null;
+		Empleado emp=null;
 		BD_Usuario bbdd=new BD_Usuario("videm");
 		BD_Videojuego bbd=new BD_Videojuego("videm");
 		BD_Compra bd=new BD_Compra("videm");
@@ -64,10 +65,18 @@ public class Main {
 					int telefono=sc.nextInt();
 					int numero=bbdd.asignarNumCliente(user);
 					numero+=1;
-					user = new Cliente(email,clave,nombre,domicilio,dni,"CLIENTE",telefono,numero);
+					user = new Usuario(email,clave,nombre,domicilio,dni,"CLIENTE",telefono);
 					bbdd.añadir_Usuario(user);
 					if ( bbdd.añadir_Usuario(user)) {
 						System.out.println("Se ha dado de alta en VIDEM");
+					}
+					else {
+						System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mï¿½s tarde.");
+					}
+					user = new Cliente(email,numero);
+					bbdd.añadir_Cliente(cl);
+					if ( bbdd.añadir_Cliente(cl)) {
+						System.out.println("Se ha dado de alta en clientes de VIDEM");
 						user = new Usuario(email,clave);				
 						opc=bbdd.login(user);
 					}
@@ -110,8 +119,18 @@ public class Main {
 						String puesto=sc.nextLine();
 						int numero=bbdd.asignarNumEmpleado(user);
 						numero+=1;
-						user = new Empleado(email,clave,nombre,domicilio,dni,"EMPLEADO",telefono,numero,puesto);
+						user = new Usuario(email,clave,nombre,domicilio,dni,"EMPLEADO",telefono);
 						bbdd.añadir_Usuario(user);
+						emp = new Empleado(email,numero,puesto);
+						bbdd.añadir_Empleado(emp);
+						if ( bbdd.añadir_Empleado(emp)) {
+							System.out.println("Se ha dado de alta en empleados de VIDEM");
+							user = new Usuario(email,clave);				
+							opc=bbdd.login(user);
+						}
+						else {
+							System.out.println("No se ha podido dar de alta en VIDEM, por favor intentelo mas tarde.");
+						}
 						break;
 					case 2:
 						sc.nextLine();
@@ -219,7 +238,7 @@ public class Main {
 					}
 				}while(opc3!= 5);
 			}
-			else {
+			if(opc2.equalsIgnoreCase("EMPLEADO")) {
 				do {
 					System.out.println("1Âº AÃ±adir videojuego");
 					System.out.println("2Âº Borrar videojuego");
@@ -281,7 +300,7 @@ public class Main {
 						for(int i=0;i<v.size();i++)
 							System.out.println(v.get(i));
 						break;
-				}
+					}
 				}while(opc3!= 4);
 			}
 		}
@@ -344,7 +363,7 @@ public class Main {
 					case 3:
 						sc.nextLine();
 						System.out.println("Facturas: ");
-						System.out.println();
+						cl = new Cliente(user.getEmail());
 						Vector<Compra> ca=bd.comprasPropias(cl);
 						for(int i=0;i<ca.size();i++) {
 							System.out.println(ca.get(i));
