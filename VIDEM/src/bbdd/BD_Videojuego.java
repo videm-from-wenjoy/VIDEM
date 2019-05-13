@@ -120,22 +120,22 @@ public class BD_Videojuego extends BD_Conector {
 	}
 	
 	public double buscarPrecio(String nomProducto, String plataforma,int unidades) {
-		String cadenaSQL="SELECT PRECIO FROM videojuegos WHERE TITULO='"+ nomProducto + " AND PLATAFORMA=" + plataforma +"'";
+		String cadenaSQL="SELECT PRECIO FROM videojuegos WHERE TITULO='"+ nomProducto + "' AND PLATAFORMA='" + plataforma +"'";
 		
 		try {
-			double precio;
+			double precio=0;
 			this.abrir();
 			s=c.createStatement();
 			reg=s.executeQuery(cadenaSQL);
-		    while(reg.next()) {
-		    	precio=reg.getDouble("PRECIO");
-		    	return precio;
-		    }
+			if(reg.next())
+				precio=reg.getDouble("PRECIO");
 			s.close();
 			this.cerrar();
+			return precio;
 		}catch(SQLException sq) {
-			System.out.println(sq.getMessage());
+			this.cerrar();
+			return -1;
 		}
-		return -1;
+		
 	}
 }

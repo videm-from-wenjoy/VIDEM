@@ -335,30 +335,27 @@ public class Main {
 						sc.nextLine();
 						String res;
 						do {
-						System.out.println("Seleccione el nombre del videojuego a comprar");
-						String nom=sc.nextLine();
-						System.out.println("Selecciona la plataforma del videojuego");
-						String plataforma=sc.nextLine();
-						System.out.println("Selecciona el número de unidades");
-						int unidades=sc.nextInt();
-			
-						double precio = bbd.buscarPrecio(nom, plataforma, unidades);
-						if(precio==-1) {
-							System.err.println("Error, no se ha encontrado un juego en esa plataforma. "
-									+ "Revise si ha puesto bien titulo o la plataforma.");
-							break;
-						}
-						double preciocarrito=0;
-					    double precioF= precio * unidades;
-					    preciocarrito= preciocarrito + precioF;
-						
-						
-						System.out.println("¿Desea comprar algun objeto más?");
-						res=sc.nextLine();
-						}while(res.equalsIgnoreCase("si"));
-						
-						
-						
+							System.out.println("Seleccione el nombre del videojuego a comprar: ");
+							String nom=sc.nextLine();
+							System.out.println("Selecciona la plataforma del videojuego");
+							String plataforma=sc.nextLine();
+							System.out.println("Selecciona el número de unidades");
+							int unidades=sc.nextInt();							
+							double precio = bbd.buscarPrecio(nom, plataforma, unidades);
+							if(precio==-1) {
+								System.err.println("Error en el sistema");							
+							}else if(precio == 0) {
+								System.out.println("El producto no existe. ");
+							}else {
+								System.out.println(precio);
+							}							
+							double preciocarrito=0;
+						    double precioF= precio * unidades;
+						    preciocarrito= preciocarrito + precioF;					
+						    sc.nextLine();
+							System.out.println("¿Desea comprar algun objeto más?");
+							res=sc.nextLine();
+						}while(res.equalsIgnoreCase("si"));						
 						break;
 					case 3:
 						sc.nextLine();
