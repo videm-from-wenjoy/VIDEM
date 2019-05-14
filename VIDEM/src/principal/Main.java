@@ -97,10 +97,10 @@ public class Main {
 					System.out.println("1. Dar de alta empleado");
 					System.out.println("2. Dar de baja empleado");
 					System.out.println("3. Dar de baja cliente");
-					System.out.println("3. Listar usuarios");
-					System.out.println("4. Listar empleados");
-					System.out.println("5. Listar clientes");
-					System.out.println("6. Salir");
+					System.out.println("4. Listar usuarios");
+					System.out.println("5. Listar empleados");
+					System.out.println("6. Listar clientes");
+					System.out.println("7. Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
