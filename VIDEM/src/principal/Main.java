@@ -11,6 +11,7 @@ import modelos.Compra;
 import modelos.Empleado;
 import modelos.Linea;
 import modelos.Usuario;
+import modelos.Venta;
 import modelos.Videojuego;
 /**
  * 
@@ -36,15 +37,15 @@ public class Main {
 		String email = null,clave;
 		
 		do {
-			System.out.println("1º Iniciar Sesion");
-			System.out.println("2º Registrarse en VIDEM");
+			System.out.println("1. Iniciar Sesion");
+			System.out.println("2. Registrarse en VIDEM");
 			int opcIni=sc.nextInt();
 			switch(opcIni) {
 				case 1:
 					sc.nextLine();
 					System.out.println("Introduce tu email");
 					email=sc.nextLine();
-					System.out.println("Introduce tu contraseña");
+					System.out.println("Introduce tu clave");
 					clave=sc.nextLine();
 					user = new Usuario(email,clave);				
 					opc=bbdd.login(user);
@@ -93,12 +94,13 @@ public class Main {
 
 			if(opc2.equalsIgnoreCase("ADMINISTRADOR")) {
 				do {
-					System.out.println("1º Dar de alta empleado");
-					System.out.println("2º Dar de baja empleado");
-					System.out.println("3º Listar usuarios");
-					System.out.println("4º Listar empleados");
-					System.out.println("5º Listar clientes");
-					System.out.println("6º Salir");
+					System.out.println("1. Dar de alta empleado");
+					System.out.println("2. Dar de baja empleado");
+					System.out.println("3. Dar de baja cliente");
+					System.out.println("4. Listar usuarios");
+					System.out.println("5. Listar empleados");
+					System.out.println("6. Listar clientes");
+					System.out.println("7. Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -115,6 +117,7 @@ public class Main {
 						String domicilio=sc.nextLine();
 						System.out.println("Telefono:");
 						int telefono=sc.nextInt();
+						sc.nextLine();
 						System.out.println("Puesto:");
 						String puesto=sc.nextLine();
 						int numero=bbdd.asignarNumEmpleado(user);
@@ -137,36 +140,44 @@ public class Main {
 						System.out.println("Correo electronico");
 						email=sc.nextLine();
 						user = new Empleado(email);
+						bbdd.borrar_Empleado(user);
 						bbdd.borrar_Usuario(user);
 						break;
 					case 3:
+						sc.nextLine();
+						System.out.println("Correo electronico");
+						email=sc.nextLine();
+						user = new Empleado(email);
+						bbdd.borrar_Cliente(user);
+						bbdd.borrar_Usuario(user);
+					case 4:
 						Vector <Usuario> usu2= bbdd.listarUsuarios();
 						for(int i=0;i<usu2.size();i++) {
 							System.out.println(usu2.get(i));
 						}
 						break;
-					case 4:
+					case 5:
 						Vector <Empleado> emp2= bbdd.listarEmpleados();
 						for(int i=0;i<emp2.size();i++) {
 							System.out.println(emp2.get(i));
 						}
 						break;
-					case 5:
+					case 6:
 						Vector<Cliente> cli2= bbdd.listarClientes(); 
 						for(int i=0;i<cli2.size();i++) {
 							System.out.println(cli2.get(i));
 						}
 						break;
 				}
-				}while(opc3!= 6);
+				}while(opc3!= 7);
 			}else
 			if(opc2.equalsIgnoreCase("ENCARGADO")) {
 				do {
-					System.out.println("1º Añadir videojuego");
-					System.out.println("2º Borrar videojuego");
-					System.out.println("3º Recuento de ventas");
-					System.out.println("4º Listar videojuegos");
-					System.out.println("5º Salir");
+					System.out.println("1. Nuevo videojuego");
+					System.out.println("2. Borrar videojuego");
+					System.out.println("3. Recuento de ventas");
+					System.out.println("4. Listar videojuegos");
+					System.out.println("5. Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -219,15 +230,9 @@ public class Main {
 						}
 						break;
 					case 3:
-						Vector<Compra> ca=bd.compras();
+						Vector<Venta> ca=bd.ventas();
 						for(int i=0;i<ca.size();i++) {
-							System.out.println("Facturas:");
 							System.out.println(ca.get(i));
-							Vector<Linea> la=bd.lineas(co);
-							for(i=0;i<la.size();i++) {
-								System.out.println("Productos:");
-								System.out.println(la.get(i));
-							}
 						}
 						break;
 					case 4:
@@ -240,10 +245,10 @@ public class Main {
 			}
 			if(opc2.equalsIgnoreCase("EMPLEADO")) {
 				do {
-					System.out.println("1º Añadir videojuego");
-					System.out.println("2º Borrar videojuego");
-					System.out.println("3º Listar videojuego");
-					System.out.println("4º Salir");
+					System.out.println("1. Nuevo videojuego");
+					System.out.println("2. Borrar videojuego");
+					System.out.println("3. Listar videojuegos");
+					System.out.println("4. Salir");
 					opc3=sc.nextInt();
 					switch(opc3) {
 					case 1:
@@ -306,17 +311,18 @@ public class Main {
 		}
 		if(opc.equalsIgnoreCase("CLIENTE")) {
 			do {
-				System.out.println("1º Buscar videojuego");
-				System.out.println("2º Hacer compra");
-				System.out.println("3º Historial de compras");
-				System.out.println("4º Salir.");
+				System.out.println("1. Buscar videojuego");
+				System.out.println("2. Hacer compra");
+				System.out.println("3. Historial de compras");
+				System.out.println("4. Borrar cuenta VIDEM");
+				System.out.println("5. Salir.");
 				opc3=sc.nextInt();
 				switch(opc3) {
 					case 1:
 						int opcEdit;
 						do {
-							System.out.println("1º Buscar por codigo de producto:");
-							System.out.println("2º Buscar por titulo y plataforma:");
+							System.out.println("1. Buscar por codigo de producto:");
+							System.out.println("2. Buscar por titulo y plataforma:");
 							opcEdit=sc.nextInt();
 							sc.nextLine();
 						}while(opcEdit!=1 && opcEdit!=2);
@@ -370,8 +376,14 @@ public class Main {
 							}
 						}
 						break;
+					case 4:
+						email=user.getEmail();
+						user = new Usuario(user.getEmail());
+						bbdd.borrar_Cliente(user);
+						bbdd.borrar_Usuario(user);
+						break;
 				}
-			}while(opc3!= 4);
+			}while(opc3!= 4 && opc3!=5);
 		}
 		
 		if(!opc.equalsIgnoreCase("EMPLEADO") && !opc.equalsIgnoreCase("CLIENTE") || opc==null) {
@@ -380,7 +392,12 @@ public class Main {
 		}
 
 	}
-	
+	/**
+	 * M�todo que valida un dni
+	 * @param dni
+	 * @author Carolina Buena�o
+	 * @return true o false si el dni cumple el formato o no.
+	 */
 	public static boolean validarDNI(String dni) {
 		 
         boolean correcto = false;
@@ -411,7 +428,12 @@ public class Main {
  
         return correcto;
     }
-
+	/**
+	 * M�todo que valida un n�mero de telefono.
+	 * @param tlf
+	 * @author Carolina Buena�o, Gonzalo Fern�ndez
+	 * @return true o false si el n�mero cumple el formarto o no.
+	 */
 	public static boolean validarTelefono(int tlf) {
 		if (tlf>999999999 && tlf<100000000)
 			return false;

@@ -1,5 +1,8 @@
 package modelos;
-
+/**
+ * @author Sergio Cruz
+ * Clase Linea
+ */
 public class Linea {
 	private int numFactura;
 	private String codProducto;
