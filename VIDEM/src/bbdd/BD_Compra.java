@@ -84,16 +84,16 @@ public class BD_Compra extends BD_Conector {
   
   public Vector<Venta>  ventas(){
 		Vector <Venta> ca=new Vector<Venta>();
-		String cadenaC="SELECT V.COD_PRODUCTO PRODUCTO, TITULO, V.UNIDADES 'EN STOCK',SUM(L.UNIDADES) VENDIDAS, PRECIO*SUM(UNIDADES) RECAUDACION"
-				+ "FROM LINEAS L,VIDEOJUEGOS V"
-				+ "WHERE V.COD_PRODUCTO = L.COD_PRODUCTO"
+		String cadenaC="SELECT V.COD_PRODUCTO PRODUCTO, TITULO, V.UNIDADES STOCK,SUM(L.UNIDADES) VENDIDAS, V.PRECIO*SUM(L.UNIDADES) RECAUDACION "
+				+ "FROM LINEAS L,VIDEOJUEGOS V "
+				+ "WHERE V.COD_PRODUCTO = L.COD_PRODUCTO "
 				+ "GROUP BY V.COD_PRODUCTO,TITULO";
 		try{	
 			this.abrir();
 			s=c.createStatement();
 			reg=s.executeQuery(cadenaC);
 			while ( reg.next()){						
-				 ca.add(new Venta(reg.getString("PRODUCTO"),reg.getString("TITULO"),reg.getInt("EN STOCK"),reg.getInt("VENDIDAS"),reg.getDouble("RECAUDACION")));
+				 ca.add(new Venta(reg.getString("PRODUCTO"),reg.getString("TITULO"),reg.getInt("STOCK"),reg.getInt("VENDIDAS"),reg.getDouble("RECAUDACION")));
 			}	
 			s.close();
 			this.cerrar();
@@ -110,13 +110,16 @@ public class BD_Compra extends BD_Conector {
    */
   public Vector<Compra>  comprasPropias(Cliente cl){
 		Vector <Compra> ca=new Vector<Compra>();
-		String cadenaC="SELECT * FROM COMPRAS WHERE N_Socio ='"+cl.getNumCliente()+"'";
+		String cadenaC="SELECT N_FACTURA, C.N_SOCIO CLIENTE, PRECIO_TOTAL, FH_COMPRA "
+				+ "FROM COMPRAS C, CLIENTES E "
+				+ "WHERE C.N_SOCIO = E.N_SOCIO "
+				+ "AND EMAIL ='"+cl.getEmail()+"'";
 		try{	
 			this.abrir();
 			s=c.createStatement();
 			reg=s.executeQuery(cadenaC);
 			while ( reg.next()){						
-				 ca.add(new Compra(reg.getInt("N_FACTURA"),reg.getInt("N_SOCIO"),reg.getDouble("PRECIO_TOTAL"),(reg.getDate("FH_COMPRA")).toLocalDate()));
+				 ca.add(new Compra(reg.getInt("N_FACTURA"),reg.getInt("CLIENTE"),reg.getDouble("PRECIO_TOTAL"),reg.getDate("FH_COMPRA").toLocalDate()));
 			}	
 			s.close();
 			this.cerrar();
