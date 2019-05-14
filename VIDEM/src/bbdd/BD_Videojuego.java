@@ -118,7 +118,13 @@ public class BD_Videojuego extends BD_Conector {
 			return null;
 		}
 	}
-	
+	/**
+	 * @author Carolina Buenaño y Sergio Cruz
+	 * @param nomProducto
+	 * @param plataforma
+	 * @param unidades
+	 * @return
+	 */
 	public double buscarPrecio(String nomProducto, String plataforma,int unidades) {
 		String cadenaSQL="SELECT PRECIO FROM videojuegos WHERE TITULO='"+ nomProducto + "' AND PLATAFORMA='" + plataforma +"'";
 		

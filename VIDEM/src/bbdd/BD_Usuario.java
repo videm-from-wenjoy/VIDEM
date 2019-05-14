@@ -55,7 +55,7 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	/**
-	 * 
+	 * @author admin
 	 * @param cl
 	 * @return
 	 */
@@ -75,42 +75,52 @@ public class BD_Usuario extends BD_Conector {
 	}
 
 	/**
-	 * 
+	 * @author Carolina Buenaño
 	 * @param Se anota el e-mail
 	 * @return Devuelve true si se ha podido borrar y false si hay hubo error. 
 	 */
-	
 	public boolean borrar_Usuario(Usuario user) {
 		String cadenaSQL = "DELETE FROM usuarios WHERE EMAIL='" + user.getEmail() + "'";
-		String cadena2 = "";
-		if (user instanceof Empleado) {
-			cadena2 = "DELETE FROM empleados WHERE EMAIL ='" + user.getEmail() + "'";
-			try {
-				this.abrir();
-				s = c.createStatement();
-				s.executeUpdate(cadena2);
-				s.close();
-				this.cerrar();
-				return true;
-			} catch (SQLException e) {
-				this.cerrar();
-				return false;
-			}
+		try {
+			this.abrir();
+			s = c.createStatement();
+			s.executeUpdate(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return true;
+		} catch (SQLException e) {
+			this.cerrar();
+			return false;
 		}
-		if (user instanceof Cliente) {
-			cadena2 = "DELETE FROM clientes WHERE EMAIL ='" + user.getEmail() + "'";
-			try {
-				this.abrir();
-				s = c.createStatement();
-				s.executeUpdate(cadena2);
-				s.close();
-				this.cerrar();
-				return true;
-			} catch (SQLException e) {
-				this.cerrar();
-				return false;
-			}
+	}
+	
+	/**
+	 * @author Carolina Buenaño y Gonzalo Fernández
+	 * @param user
+	 * @return
+	 */
+	public boolean borrar_Cliente(Usuario user) {
+		String cadenaSQL = "DELETE FROM clientes WHERE EMAIL ='" + user.getEmail() + "'";
+		try {
+			this.abrir();
+			s = c.createStatement();
+			s.executeUpdate(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return true;
+		} catch (SQLException e) {
+			this.cerrar();
+			return false;
 		}
+	}
+	
+	/**
+	 * @author Carolina Buenaño y Gonzalo Fernández
+	 * @param user
+	 * @return
+	 */
+	public boolean borrar_Empleado(Usuario user) {
+		String cadenaSQL = "DELETE FROM empleados WHERE EMAIL ='" + user.getEmail() + "'";
 		try {
 			this.abrir();
 			s = c.createStatement();
@@ -125,11 +135,10 @@ public class BD_Usuario extends BD_Conector {
 	}
 
 	/**	
-	 * 
+	 * @author Gonzalo Fernandez
 	 * @param Se anota el email del usuario y su contraseña- 
 	 * @return Devuelve null si hubo un error, un valor vacío si no encuentra el rol y si lo encuentra devuelve el rol. 
 	 */
-
 	public String login(Usuario user) {
 		String cadena = "SELECT ROL FROM usuarios WHERE EMAIL='" + user.getEmail() + "' AND PASSWORD='"
 				+ user.getPassword() + "'";
@@ -150,7 +159,7 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	/**
-	 * 
+	 * @author Gonzalo Fernandez
 	 * @param 
 	 * @return Devuelve null si hubo un error, un valor vacío si no encuentra el puesto y si lo encuentra devuelve el puesto. 
 	 */
@@ -174,7 +183,7 @@ public class BD_Usuario extends BD_Conector {
 		}
 	}
 	/**
-	 * 
+	 * @author Carolina Buenaño
 	 * @param Se anota el DNI del usuario
 	 * @param Se anota campo para saber la opción que queremos editar
 	 * @param El contenido es la información que va a cambiar
@@ -271,9 +280,9 @@ public class BD_Usuario extends BD_Conector {
 	}	
 
 	/**
-	 * 
+	 * @author Gonzalo Fernandez
 	 * @param user
-	 * @return
+	 * @return t, que es el maximo número de empleado de tabla para que se almacene en una variable a la que se sumara 1 para ser el número de empleado del próximo empleado.
 	 */
 	public int asignarNumEmpleado(Usuario user){
 		String cadena="SELECT MAX(N_EMPLEADO) FROM empleados";
@@ -292,10 +301,11 @@ public class BD_Usuario extends BD_Conector {
 			return -1;
 		}
 	}
+	
 	/**
-	 * 
+	 * @author Gonzalo Fernandez
 	 * @param user
-	 * @return
+	 * @return t, que es el maximo número de cliente de tabla para que se almacene en una variable a la que se sumara 1 para ser el número de cliente del próximo cliente.
 	 */
 	public int asignarNumCliente(Usuario user){
 		String cadena="SELECT MAX(N_SOCIO) FROM clientes";
@@ -314,6 +324,12 @@ public class BD_Usuario extends BD_Conector {
 			return -1;
 		}
 	}
+	
+	/**
+	 * @author Carolina Buenaño
+	 * @param user
+	 * @return
+	 */
 	public String validarDNI(Usuario user) {
 		String cadenaSQL = "SELECT DNI FROM usuarios WHERE DNI='" + user.getDni() + "'";
 		try {
@@ -331,7 +347,12 @@ public class BD_Usuario extends BD_Conector {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * @author Carolina Buenaño
+	 * @param user
+	 * @return
+	 */
 	public int validarTELEFONO(Usuario user) {
 		String cadenaSQL = "SELECT TELEFONO FROM usuarios WHERE TELEFONO='" + user.getTelefono() + "'";
 		try {

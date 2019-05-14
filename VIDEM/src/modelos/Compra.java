@@ -1,9 +1,7 @@
 package modelos;
-import java.sql.Date;
 import java.time.LocalDate;
 /**
- * 
- * @author Gonzalo
+ * @author Sergio Cruz
  * Clase Compra...
  *
  */
