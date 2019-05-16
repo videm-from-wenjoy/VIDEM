@@ -32,7 +32,7 @@ public class Main {
 		BD_Videojuego bbd=new BD_Videojuego("videm");
 		BD_Compra bd=new BD_Compra("videm");
 		String opc=null;
-		int opc3;
+		int opc3,cont=0;
 		LocalDate lanzamiento=null;
 		String email = null,clave;
 		
@@ -304,6 +304,11 @@ public class Main {
 						Vector<Videojuego> v=bbd.listarVideojuegos();
 						for(int i=0;i<v.size();i++)
 							System.out.println(v.get(i));
+							cont++;
+							Vector<Linea> la=bd.lineas(cont);
+							for(int i=0;i<la.size();i++) {
+								System.out.println("        "+la.get(i));
+							}
 						break;
 					}
 				}while(opc3!= 4);
@@ -370,9 +375,10 @@ public class Main {
 						Vector<Compra> ca=bd.comprasPropias(cl);
 						for(int i=0;i<ca.size();i++) {
 							System.out.println(ca.get(i));
-							Vector<Linea> la=bd.lineas(co);
+							cont++;
+							Vector<Linea> la=bd.lineas(cont);
 							for(i=0;i<la.size();i++) {
-								System.out.println(la.get(i));
+								System.out.println("        "+la.get(i));
 							}
 						}
 						break;

@@ -134,9 +134,9 @@ public class BD_Compra extends BD_Conector {
    * @author Gonzalo Fernandez
    * @return
    */
-  public Vector<Linea>  lineas(Compra co){
+  public Vector<Linea>  lineas(int cont){
 		Vector <Linea> la=new Vector<Linea>();
-		String cadenaL="SELECT * FROM LINEAS WHERE N_FACTURA = '"+co.getNumFactura()+"'";
+		String cadenaL="SELECT * FROM LINEAS WHERE N_FACTURA = '"+cont+"'";
 		try{	
 			this.abrir();
 			s=c.createStatement();
